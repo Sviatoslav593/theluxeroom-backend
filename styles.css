@@ -1,0 +1,100 @@
+/* Custom styles for Black Boutique aesthetic */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.hero-bg {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("https://source.unsplash.com/random/1920x1080?dark-fashion");
+  background-size: cover;
+  background-position: center;
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  cursor: pointer; /* Pointer cursor on product card hover */
+}
+
+.product-img {
+  transition: transform 0.3s ease;
+}
+
+/* Disable scroll when mobile menu is open */
+body.menu-open {
+  overflow: hidden;
+}
+
+/* Header with elegant bottom border and shadow */
+header {
+  border-bottom: 1px solid #4b5563; /* Tailwind gray-600 */
+  border-bottom-left-radius: 4px; /* Subtle upward curve on left */
+  border-bottom-right-radius: 4px; /* Subtle upward curve on right */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Animated header links */
+.nav-link {
+  position: relative;
+  transition: color 0.3s ease;
+  display: inline-block;
+}
+
+.nav-link:hover {
+  color: #d1d5db; /* Tailwind gray-300 */
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #d1d5db; /* Tailwind gray-300 */
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Animated buttons (Add to Cart, Shop Now) */
+.btn-anim {
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    border-image-source 0.3s ease;
+  display: inline-block;
+  background: #ffffff; /* Solid white */
+  border: 2px solid transparent;
+  border-image: linear-gradient(45deg, #ffffff, #1f2937) 1; /* White to gray-800 gradient border */
+  border-radius: 8px; /* Slight rounding for elegance */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.btn-anim:hover {
+  background: #e5e7eb; /* Tailwind gray-200 */
+  transform: scale(1.05);
+  border-image: linear-gradient(45deg, #1f2937, #ffffff) 1; /* Flipped gradient border on hover */
+}
+
+.shop-now {
+  padding: 1rem 2rem; /* Larger padding for prominence */
+  font-size: 1.25rem; /* Larger text for hero button */
+}
+
+.add-to-cart {
+  padding: 0.5rem 1rem; /* Compact for product cards */
+  width: 100%; /* Full width within card */
+}
+
+/* Ensure two cards per row on mobile */
+@media (max-width: 639px) {
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
