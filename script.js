@@ -1,23 +1,41 @@
-// Mobile menu toggle
 function toggleMenu() {
   const menu = document.getElementById("mobile-menu");
   const burgerIcon = document.getElementById("burger-icon");
   const closeIcon = document.getElementById("close-icon");
   const body = document.body;
 
-  const isOpen = !menu.classList.contains("translate-x-full");
-  if (isOpen) {
-    menu.classList.add("translate-x-full");
-    burgerIcon.classList.remove("hidden");
-    closeIcon.classList.add("hidden");
-    body.classList.remove("menu-open");
-  } else {
-    menu.classList.remove("translate-x-full");
-    burgerIcon.classList.add("hidden");
-    closeIcon.classList.remove("hidden");
-    body.classList.add("menu-open");
-  }
+  // Toggle menu visibility
+  menu.classList.toggle("translate-x-full");
+  // Toggle icons
+  burgerIcon.classList.toggle("hidden");
+  closeIcon.classList.toggle("hidden");
+  // Toggle body scroll lock
+  body.classList.toggle("menu-open");
 }
+
+// Initialize event listeners
+document.addEventListener("DOMContentLoaded", () => {
+  const openBtn = document.getElementById("burger-open-btn");
+  const closeBtn = document.getElementById("burger-close-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const menuLinks = document.querySelectorAll(".mobile-menu-link");
+
+  // Open/close menu on button clicks
+  openBtn.addEventListener("click", toggleMenu);
+  closeBtn.addEventListener("click", toggleMenu);
+
+  // Close menu when clicking links
+  menuLinks.forEach((link) => {
+    link.addEventListener("click", toggleMenu);
+  });
+
+  // Close menu when clicking outside (on the menu background)
+  mobileMenu.addEventListener("click", (e) => {
+    if (e.target === mobileMenu) {
+      toggleMenu();
+    }
+  });
+});
 
 // Simple hero slider simulation
 let currentSlide = 0;

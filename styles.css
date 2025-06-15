@@ -98,3 +98,11 @@ header {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* Style for close button in mobile menu */
+#burger-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 50;
+}

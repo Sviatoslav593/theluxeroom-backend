@@ -45,13 +45,8 @@
                 d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
               /></svg
           ></a>
-          <button
-            id="burger-btn"
-            class="md:hidden text-white"
-            onclick="toggleMenu()"
-          >
+          <button id="burger-open-btn" class="md:hidden text-white">
             <svg
-              id="burger-icon"
               class="w-6 h-6"
               fill="none"
               stroke="currentColor"
@@ -64,20 +59,6 @@
                 d="M4 6h16M4 12h16m-7 6h7"
               />
             </svg>
-            <svg
-              id="close-icon"
-              class="w-6 h-6 hidden"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
           </button>
         </div>
       </nav>
@@ -86,25 +67,72 @@
         id="mobile-menu"
         class="fixed inset-0 bg-black bg-opacity-90 z-40 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden"
       >
+        <button
+          id="burger-close-btn"
+          class="absolute top-4 right-4 text-white z-50"
+        >
+          <svg
+            id="burger-icon"
+            class="w-6 h-6 hidden"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            />
+          </svg>
+          <svg
+            id="close-icon"
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
         <ul class="flex flex-col items-center justify-center h-full space-y-6">
           <li>
-            <a href="#" class="text-white text-2xl hover:text-gray-300">Home</a>
+            <a
+              href="#"
+              class="text-white text-2xl hover:text-gray-300 mobile-menu-link"
+              >Home</a
+            >
           </li>
           <li>
-            <a href="#" class="text-white text-2xl hover:text-gray-300">Shop</a>
+            <a
+              href="#"
+              class="text-white text-2xl hover:text-gray-300 mobile-menu-link"
+              >Shop</a
+            >
           </li>
           <li>
-            <a href="#" class="text-white text-2xl hover:text-gray-300"
+            <a
+              href="#"
+              class="text-white text-2xl hover:text-gray-300 mobile-menu-link"
               >Men's Shoes</a
             >
           </li>
           <li>
-            <a href="#" class="text-white text-2xl hover:text-gray-300"
+            <a
+              href="#"
+              class="text-white text-2xl hover:text-gray-300 mobile-menu-link"
               >Women's Shoes</a
             >
           </li>
           <li>
-            <a href="#" class="text-white text-2xl hover:text-gray-300"
+            <a
+              href="#"
+              class="text-white text-2xl hover:text-gray-300 mobile-menu-link"
               >Contact</a
             >
           </li>
@@ -142,7 +170,7 @@
             class="product-card bg-gray-900 rounded-lg overflow-hidden shadow-lg"
           >
             <img
-              src="./balenciaga.jpeg"
+              src="https://source.unsplash.com/random/300x300?shoes"
               alt="Amiri Sneakers"
               class="product-img w-full h-64 object-cover"
             />
@@ -160,7 +188,7 @@
             class="product-card bg-gray-900 rounded-lg overflow-hidden shadow-lg"
           >
             <img
-              src="./balenciaga.jpeg"
+              src="https://source.unsplash.com/random/300x300?shoes"
               alt="Balenciaga Boots"
               class="product-img w-full h-64 object-cover"
             />
@@ -178,7 +206,7 @@
             class="product-card bg-gray-900 rounded-lg overflow-hidden shadow-lg"
           >
             <img
-              src="./balenciaga.jpeg"
+              src="https://source.unsplash.com/random/300x300?shoes"
               alt="Fendi Sneakers"
               class="product-img w-full h-64 object-cover"
             />
@@ -196,7 +224,7 @@
             class="product-card bg-gray-900 rounded-lg overflow-hidden shadow-lg"
           >
             <img
-              src="./balenciaga.jpeg"
+              src="https://source.unsplash.com/random/300x300?shoes"
               alt="Dsquared Shoes"
               class="product-img w-full h-64 object-cover"
             />
