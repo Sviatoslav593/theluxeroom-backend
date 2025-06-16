@@ -64,7 +64,7 @@ header {
   width: 100%;
 }
 
-/* Animated buttons (Add to Cart, Shop Now) */
+/* Animated buttons (Shop Now) */
 .btn-anim {
   transition: background-color 0.3s ease, transform 0.3s ease,
     border-image-source 0.3s ease;
@@ -87,15 +87,71 @@ header {
   font-size: 1.25rem; /* Larger text for hero button */
 }
 
-.add-to-cart {
-  padding: 0.5rem 1rem; /* Compact for product cards */
-  width: 100%; /* Full width within card */
+/* Product card content */
+.product-content {
+  transition: transform 0.3s ease-in-out;
+  z-index: 10; /* Ensure content is above button */
 }
 
-/* Ensure two cards per row on mobile */
+.product-card:hover .product-content {
+  transform: translateY(-24px); /* Shift content higher on hover */
+}
+
+/* Add to Cart button styles */
+.add-to-cart-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  z-index: 5; /* Ensure button is below content */
+}
+
+.product-card:hover .add-to-cart-wrapper {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.add-to-cart {
+  background: #000000; /* Black background */
+  color: #ffffff; /* White text */
+  padding: 0.5rem 1rem;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart:hover {
+  background: #1a1a1a; /* Slightly lighter black on hover */
+}
+
+/* Mobile-specific styles */
 @media (max-width: 639px) {
   .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .product-card {
+    padding-bottom: 0; /* Remove extra padding */
+  }
+
+  .add-to-cart-wrapper {
+    position: relative; /* Flow naturally in card */
+    transform: translateY(0); /* Always visible */
+    opacity: 1; /* Always visible */
+    margin-top: 0.5rem; /* Space above button */
+  }
+
+  .product-card:hover .product-content {
+    transform: translateY(0); /* No shift on mobile */
+  }
+
+  .add-to-cart {
+    padding: 0.5rem 1rem;
+    width: 100%;
   }
 }
 
