@@ -16,6 +16,7 @@ function toggleMenu() {
   // Reset sub-menu when closing main menu
   const submenu = document.getElementById("mobile-clothing-submenu");
   submenu.classList.remove("show");
+  submenu.style.height = "0px";
   clothingToggle.classList.remove("active");
 }
 
