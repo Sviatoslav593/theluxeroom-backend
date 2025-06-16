@@ -23,12 +23,66 @@
         <div class="text-2xl font-bold">
           <a href="/" class="text-white">Black Boutique</a>
         </div>
-        <ul class="hidden md:flex space-x-8">
-          <li><a href="#" class="nav-link text-white">Home</a></li>
-          <li><a href="#" class="nav-link text-white">Shop</a></li>
-          <li><a href="#" class="nav-link text-white">Men's Shoes</a></li>
-          <li><a href="#" class="nav-link text-white">Women's Shoes</a></li>
-          <li><a href="#" class="nav-link text-white">Contact</a></li>
+        <ul class="hidden md:flex space-x-8 items-center">
+          <li class="relative group">
+            <a href="#" class="nav-link text-white flex items-center">
+              <span>Clothing</span>
+              <svg
+                class="w-4 h-4 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </a>
+            <ul
+              class="dropdown absolute left-0 mt-2 w-48 bg-[#2d2d2d] text-white rounded-lg shadow-lg opacity-0 transform translate-y-[-10px] transition-all duration-300 ease-in-out"
+            >
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 hover:bg-gray-800 rounded-t-lg cursor-pointer"
+                  >T-shirts</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 hover:bg-gray-800 cursor-pointer"
+                  >Pants</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 hover:bg-gray-800 cursor-pointer"
+                  >Shorts</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 hover:bg-gray-800 cursor-pointer"
+                  >Jackets</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 hover:bg-gray-800 rounded-b-lg cursor-pointer"
+                  >Hoodies</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li><a href="#" class="nav-link text-white">Footwear</a></li>
+          <li><a href="#" class="nav-link text-white">Bags</a></li>
         </ul>
         <div class="flex items-center space-x-4">
           <a href="#" class="text-white"
@@ -100,40 +154,151 @@
             />
           </svg>
         </button>
-        <ul class="flex flex-col items-center justify-center h-full space-y-6">
-          <li>
+        <ul class="flex flex-col items-center justify-center h-full space-y-0">
+          <li class="mobile-menu-item w-full border-b border-gray-600">
             <a
               href="#"
-              class="text-white text-2xl hover:text-gray-300 mobile-menu-link"
-              >Home</a
+              class="mobile-menu-link text-white text-2xl hover:text-gray-300 flex items-center justify-center px-6 py-4"
+              id="mobile-clothing-toggle"
+            >
+              <span>Clothing</span>
+              <svg
+                class="w-4 h-4 ml-2 transition-transform duration-300 ease-in-out"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </a>
+            <ul
+              id="mobile-clothing-submenu"
+              class="mobile-submenu flex-col w-full text-white mt-0 overflow-hidden"
+            >
+              <li class="sub-item border-b border-gray-600">
+                <a
+                  href="#"
+                  class="flex items-center pl-8 pr-6 py-2 hover:bg-gray-800 cursor-pointer"
+                >
+                  <span>T-shirts</span>
+                  <svg
+                    class="w-4 h-4 ml-auto"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </a>
+              </li>
+              <li class="sub-item border-b border-gray-600">
+                <a
+                  href="#"
+                  class="flex items-center pl-8 pr-6 py-2 hover:bg-gray-800 cursor-pointer"
+                >
+                  <span>Pants</span>
+                  <svg
+                    class="w-4 h-4 ml-auto"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </a>
+              </li>
+              <li class="sub-item border-b border-gray-600">
+                <a
+                  href="#"
+                  class="flex items-center pl-8 pr-6 py-2 hover:bg-gray-800 cursor-pointer"
+                >
+                  <span>Shorts</span>
+                  <svg
+                    class="w-4 h-4 ml-auto"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </a>
+              </li>
+              <li class="sub-item border-b border-gray-600">
+                <a
+                  href="#"
+                  class="flex items-center pl-8 pr-6 py-2 hover:bg-gray-800 cursor-pointer"
+                >
+                  <span>Jackets</span>
+                  <svg
+                    class="w-4 h-4 ml-auto"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </a>
+              </li>
+              <li class="sub-item">
+                <a
+                  href="#"
+                  class="flex items-center pl-8 pr-6 py-2 hover:bg-gray-800 cursor-pointer"
+                >
+                  <span>Hoodies</span>
+                  <svg
+                    class="w-4 h-4 ml-auto"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="mobile-menu-item w-full border-b border-gray-600">
+            <a
+              href="#"
+              class="mobile-menu-link text-white text-2xl hover:text-gray-300 flex items-center justify-center px-6 py-4"
+              >Footwear</a
             >
           </li>
-          <li>
+          <li class="mobile-menu-item w-full">
             <a
               href="#"
-              class="text-white text-2xl hover:text-gray-300 mobile-menu-link"
-              >Shop</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              class="text-white text-2xl hover:text-gray-300 mobile-menu-link"
-              >Men's Shoes</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              class="text-white text-2xl hover:text-gray-300 mobile-menu-link"
-              >Women's Shoes</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              class="text-white text-2xl hover:text-gray-300 mobile-menu-link"
-              >Contact</a
+              class="mobile-menu-link text-white text-2xl hover:text-gray-300 flex items-center justify-center px-6 py-4"
+              >Bags</a
             >
           </li>
         </ul>
@@ -167,16 +332,16 @@
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
           <!-- Product Card -->
           <div
-            class="product-card bg-gray-900 rounded-lg overflow-hidden shadow-lg relative"
+            class="product-card rounded-lg overflow-hidden shadow-lg relative"
           >
             <img
-              src="https://source.unsplash.com/random/300x300?shoes"
+              src="./balenciaga.jpeg"
               alt="Amiri Sneakers"
               class="product-img w-full h-64 object-cover"
             />
             <div class="p-4">
               <div class="product-content">
-                <h3 class="text-xl font-semibold">Amiri Sneakers</h3>
+                <h3 class="text-xl font-semibold text-white">Amiri Sneakers</h3>
                 <p class="text-gray-400">$350</p>
               </div>
               <div class="add-to-cart-wrapper">
@@ -189,16 +354,18 @@
             </div>
           </div>
           <div
-            class="product-card bg-gray-900 rounded-lg overflow-hidden shadow-lg relative"
+            class="product-card rounded-lg overflow-hidden shadow-lg relative"
           >
             <img
-              src="https://source.unsplash.com/random/300x300?shoes"
+              src="./balenciaga.jpeg"
               alt="Balenciaga Boots"
               class="product-img w-full h-64 object-cover"
             />
             <div class="p-4">
               <div class="product-content">
-                <h3 class="text-xl font-semibold">Balenciaga Boots</h3>
+                <h3 class="text-xl font-semibold text-white">
+                  Balenciaga Boots
+                </h3>
                 <p class="text-gray-400">$450</p>
               </div>
               <div class="add-to-cart-wrapper">
@@ -211,16 +378,16 @@
             </div>
           </div>
           <div
-            class="product-card bg-gray-900 rounded-lg overflow-hidden shadow-lg relative"
+            class="product-card rounded-lg overflow-hidden shadow-lg relative"
           >
             <img
-              src="https://source.unsplash.com/random/300x300?shoes"
+              src="./balenciaga.jpeg"
               alt="Fendi Sneakers"
               class="product-img w-full h-64 object-cover"
             />
             <div class="p-4">
               <div class="product-content">
-                <h3 class="text-xl font-semibold">Fendi Sneakers</h3>
+                <h3 class="text-xl font-semibold text-white">Fendi Sneakers</h3>
                 <p class="text-gray-400">$380</p>
               </div>
               <div class="add-to-cart-wrapper">
@@ -233,16 +400,16 @@
             </div>
           </div>
           <div
-            class="product-card bg-gray-900 rounded-lg overflow-hidden shadow-lg relative"
+            class="product-card rounded-lg overflow-hidden shadow-lg relative"
           >
             <img
-              src="https://source.unsplash.com/random/300x300?shoes"
+              src="./balenciaga.jpeg"
               alt="Dsquared Shoes"
               class="product-img w-full h-64 object-cover"
             />
             <div class="p-4">
               <div class="product-content">
-                <h3 class="text-xl font-semibold">Dsquared Shoes</h3>
+                <h3 class="text-xl font-semibold text-white">Dsquared Shoes</h3>
                 <p class="text-gray-400">$320</p>
               </div>
               <div class="add-to-cart-wrapper">
