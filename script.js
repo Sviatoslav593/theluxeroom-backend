@@ -3,7 +3,14 @@ function toggleMenu() {
   const burgerIcon = document.getElementById("burger-icon");
   const closeIcon = document.getElementById("close-icon");
   const body = document.body;
-  const clothingToggle = document.getElementById("mobile-clothing-toggle");
+  const menToggle = document.getElementById("mobile-men-toggle");
+  const womenToggle = document.getElementById("mobile-women-toggle");
+  const menClothingToggle = document.getElementById(
+    "mobile-men-clothing-toggle"
+  );
+  const womenClothingToggle = document.getElementById(
+    "mobile-women-clothing-toggle"
+  );
 
   // Toggle menu visibility
   menu.classList.toggle("translate-x-full");
@@ -13,26 +20,74 @@ function toggleMenu() {
   // Toggle body scroll lock
   body.classList.toggle("menu-open");
 
-  // Reset sub-menu when closing main menu
-  const submenu = document.getElementById("mobile-clothing-submenu");
-  submenu.classList.remove("show");
-  submenu.style.height = "0px";
-  clothingToggle.classList.remove("active");
+  // Reset all sub-menus when closing main menu
+  const submenus = [
+    {
+      submenu: document.getElementById("mobile-men-submenu"),
+      toggle: menToggle,
+    },
+    {
+      submenu: document.getElementById("mobile-women-submenu"),
+      toggle: womenToggle,
+    },
+    {
+      submenu: document.getElementById("mobile-men-clothing-submenu"),
+      toggle: menClothingToggle,
+    },
+    {
+      submenu: document.getElementById("mobile-women-clothing-submenu"),
+      toggle: womenClothingToggle,
+    },
+  ];
+
+  submenus.forEach(({ submenu, toggle }) => {
+    if (submenu) {
+      submenu.classList.remove("show");
+      submenu.style.height = "0px";
+    }
+    if (toggle) {
+      toggle.classList.remove("active");
+    }
+  });
 }
 
-// Toggle Clothing sub-menu in mobile menu
-function toggleClothingSubmenu(event) {
+function toggleSubmenu(event, submenuId, toggleId) {
   event.preventDefault();
-  const submenu = document.getElementById("mobile-clothing-submenu");
-  const clothingToggle = document.getElementById("mobile-clothing-toggle");
+  event.stopPropagation(); // Prevent parent menu toggle
+  const submenu = document.getElementById(submenuId);
+  const toggle = document.getElementById(toggleId);
 
   const isShowing = submenu.classList.contains("show");
 
   if (!isShowing) {
+    // Close other sub-menus at the same level
+    const parentSubmenu = submenu.closest(".submenu-wrapper");
+    const siblingSubmenus = parentSubmenu
+      ? parentSubmenu.querySelectorAll(".mobile-submenu, .mobile-sub-submenu")
+      : document.querySelectorAll(".mobile-submenu, .mobile-sub-submenu");
+    const siblingToggles = parentSubmenu
+      ? parentSubmenu.querySelectorAll(".mobile-menu-link")
+      : document.querySelectorAll(".mobile-menu-link");
+
+    siblingSubmenus.forEach((otherSubmenu) => {
+      if (otherSubmenu !== submenu && otherSubmenu.classList.contains("show")) {
+        otherSubmenu.classList.remove("show");
+        otherSubmenu.style.height = "0px";
+      }
+    });
+
+    siblingToggles.forEach((otherToggle) => {
+      if (otherToggle !== toggle && otherToggle.classList.contains("active")) {
+        otherToggle.classList.remove("active");
+      }
+    });
+
     // Temporarily show submenu to calculate height
+    submenu.style.display = "block";
     submenu.style.height = "auto";
     const height = submenu.scrollHeight + "px";
     submenu.style.height = "0px";
+    submenu.style.display = "";
 
     // Force reflow to ensure transition starts
     submenu.offsetHeight;
@@ -53,7 +108,7 @@ function toggleClothingSubmenu(event) {
     );
   }
 
-  clothingToggle.classList.toggle("active");
+  toggle.classList.toggle("active");
 }
 
 // Initialize event listeners
@@ -61,38 +116,52 @@ document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.getElementById("burger-open-btn");
   const closeBtn = document.getElementById("burger-close-btn");
   const mobileMenu = document.getElementById("mobile-menu");
-  const mobileMenuLinks = document.querySelectorAll(".mobile-menu-link");
-  const clothingToggle = document.getElementById("mobile-clothing-toggle");
-  const subMenuLinks = document.querySelectorAll(".sub-item a");
+  const menToggle = document.getElementById("mobile-men-toggle");
+  const womenToggle = document.getElementById("mobile-women-toggle");
+  const menClothingToggle = document.getElementById(
+    "mobile-men-clothing-toggle"
+  );
+  const womenClothingToggle = document.getElementById(
+    "mobile-women-clothing-toggle"
+  );
+  const mobileMenuLinks = document.querySelectorAll(
+    ".mobile-menu-link:not(#mobile-men-toggle, #mobile-women-toggle, #mobile-men-clothing-toggle, #mobile-women-clothing-toggle)"
+  );
 
   // Open/close main menu
   openBtn.addEventListener("click", toggleMenu);
   closeBtn.addEventListener("click", toggleMenu);
 
-  // Toggle Clothing sub-menu
-  clothingToggle.addEventListener("click", toggleClothingSubmenu);
+  // Toggle sub-menus
+  if (menToggle)
+    menToggle.addEventListener("click", (e) =>
+      toggleSubmenu(e, "mobile-men-submenu", "mobile-men-toggle")
+    );
+  if (womenToggle)
+    womenToggle.addEventListener("click", (e) =>
+      toggleSubmenu(e, "mobile-women-submenu", "mobile-women-toggle")
+    );
+  if (menClothingToggle)
+    menClothingToggle.addEventListener("click", (e) =>
+      toggleSubmenu(
+        e,
+        "mobile-men-clothing-submenu",
+        "mobile-men-clothing-toggle"
+      )
+    );
+  if (womenClothingToggle)
+    womenClothingToggle.addEventListener("click", (e) =>
+      toggleSubmenu(
+        e,
+        "mobile-women-clothing-submenu",
+        "mobile-women-clothing-toggle"
+      )
+    );
 
-  // Close menu and sub-menu when clicking top-level links (except Clothing toggle)
+  // Close menu when clicking non-toggle links
   mobileMenuLinks.forEach((link) => {
-    if (link.id !== "mobile-clothing-toggle") {
-      link.addEventListener("click", () => {
-        toggleMenu();
-        const submenu = document.getElementById("mobile-clothing-submenu");
-        submenu.classList.remove("show");
-        submenu.style.height = "0px";
-        clothingToggle.classList.remove("active");
-      });
-    }
-  });
-
-  // Close menu and sub-menu when clicking sub-menu links
-  subMenuLinks.forEach((link) => {
     link.addEventListener("click", () => {
       toggleMenu();
-      const submenu = document.getElementById("mobile-clothing-submenu");
-      submenu.classList.remove("show");
-      submenu.style.height = "0px";
-      clothingToggle.classList.remove("active");
     });
   });
 
