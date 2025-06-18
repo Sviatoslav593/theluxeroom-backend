@@ -1,28 +1,38 @@
-/* Custom styles for Black Boutique aesthetic */
+/* Custom styles for Black Boutique translucent aesthetic */
 body {
   font-family: "Poppins", sans-serif;
-  background-color: #1a1a1a;
+  background: linear-gradient(to bottom, #121212, #1a1a1a);
   color: #ffffff;
 }
 
+.backdrop-blur {
+  backdrop-filter: blur(8px);
+}
+
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
 .hero-bg {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("https://source.unsplash.com/random/1920x1080?dark-fashion");
+  background: url("https://source.unsplash.com/random/1920x1080?dark-fashion")
+    no-repeat center center;
   background-size: cover;
-  background-position: center;
+  position: relative;
+  background-color: #1a1a1a;
 }
 
-.product-card:hover .product-img {
-  transform: scale(1.05) translateY(-25px);
-  transition: transform 0.3s ease-in-out;
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  z-index: 1;
 }
 
-.product-card:hover {
-  cursor: pointer;
-}
-
-.product-img {
-  transition: transform 0.3s ease-in-out;
+.hero-bg > div {
+  position: relative;
+  z-index: 2;
 }
 
 /* Disable scroll when mobile menu is open */
@@ -30,12 +40,16 @@ body.menu-open {
   overflow: hidden;
 }
 
-/* Header with elegant bottom border and shadow */
+/* Header with solid black */
 header {
+  background: #000000;
   border-bottom: 1px solid #4b5563;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer with solid black */
+footer {
+  background: #000000;
 }
 
 /* Animated header links */
@@ -68,11 +82,13 @@ header {
 
 .mobile-menu-link {
   position: relative;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  background: transparent;
 }
 
 .mobile-menu-link:hover {
   color: #d1d5db;
+  background-color: #1f2937;
 }
 
 .mobile-menu-link::after {
@@ -80,7 +96,7 @@ header {
   position: absolute;
   width: 0;
   height: 2px;
-  bottom: -4px;
+  bottom: -2px;
   left: 0;
   background-color: #d1d5db;
   transition: width 0.3s ease-in-out;
@@ -94,7 +110,7 @@ header {
 .dropdown {
   z-index: 60;
   visibility: hidden;
-  background-color: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(8px);
 }
 
@@ -111,7 +127,7 @@ header {
 .sub-dropdown {
   z-index: 60;
   visibility: hidden;
-  background-color: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(8px);
 }
 
@@ -128,8 +144,8 @@ header {
   background: #ffffff;
   border: 2px solid transparent;
   background-clip: padding-box;
-  clip-path: inset(0 round 16px);
-  border-radius: 16px;
+  clip-path: inset(0 round 8px);
+  border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   position: relative;
 }
@@ -138,10 +154,10 @@ header {
   content: "";
   position: absolute;
   inset: -2px;
-  border-radius: 16px;
+  border-radius: 8px;
   background: linear-gradient(45deg, #ffffff, #1f2937);
   z-index: -1;
-  transition: background 0.6s ease-in-out 0.1s;
+  transition: background 0.3s ease-in-out 0.1s;
 }
 
 .btn-anim:hover {
@@ -160,36 +176,38 @@ header {
 
 /* Product card styles */
 .product-card {
-  background-color: #2d2d2d;
+  background: #1a1a1a;
   border: 1px solid #4b5563;
-  position: relative;
-  overflow: hidden;
+  transition: transform 0.35s ease-in-out, box-shadow 0.35s ease-in-out;
+}
+
+.product-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.product-img {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
 }
 
 .product-content {
-  transition: transform 0.3s ease-in-out;
-  z-index: 10;
+  background: none;
 }
 
-.product-card:hover .product-content {
-  transform: translateY(-36px);
-}
-
-/* Add to Cart button styles */
 .add-to-cart-wrapper {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  transform: translateY(100%);
   opacity: 0;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  z-index: 5;
+  transform: translateY(10px);
+  transition: opacity 0.35s ease-in-out, transform 0.35s ease-in-out;
 }
 
 .product-card:hover .add-to-cart-wrapper {
-  transform: translateY(0);
   opacity: 1;
+  transform: translateY(0);
 }
 
 .add-to-cart {
@@ -203,123 +221,91 @@ header {
 }
 
 .add-to-cart:hover {
-  background: #1a1a1a;
+  background: #1f2937;
 }
 
 /* Mobile-specific styles */
 @media (max-width: 639px) {
-  .grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .grid {
+    gap: 1.5rem !important;
   }
 
   .product-card {
     padding-bottom: 0;
   }
 
+  .product-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
   .add-to-cart-wrapper {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .mobile-menu-list {
     position: relative;
-    transform: translateY(0);
-    opacity: 1;
-    margin-top: 0.5rem;
-  }
-
-  .product-card:hover .product-content {
-    transform: translateY(0);
-  }
-
-  .add-to-cart {
-    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
+    min-height: 100vh;
   }
 
   .mobile-menu-item {
     width: 100%;
-    text-align: center;
-    position: relative;
+    position: static;
   }
 
   .mobile-menu-link {
     display: flex;
     width: 100%;
-    justify-content: center;
     align-items: center;
+    font-weight: 400;
+    justify-content: space-between;
   }
 
-  .submenu-wrapper {
-    position: relative;
-    width: 100%;
+  .mobile-menu-link.text-2xl {
+    font-weight: 600;
   }
 
-  .mobile-submenu {
-    background: rgba(0, 0, 0, 0.85);
+  .submenu,
+  .submenu-sub {
+    background: rgba(0, 0, 0, 0.9);
     backdrop-filter: blur(8px);
-    padding: 0;
     width: 100%;
-    height: 0;
+    max-height: 0;
     opacity: 0;
-    transform: translateY(10px);
     overflow: hidden;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 10;
-    transition: height 0.4s ease-in-out, opacity 0.4s ease-in-out,
-      transform 0.4s ease-in-out;
-    transition-delay: 0.1s;
+    transition: max-height 0.4s cubic-bezier(0.4, 0.2, 1, 1),
+      opacity 0.4s cubic-bezier(0.4, 0.2, 1, 1);
   }
 
-  .mobile-submenu.show {
-    height: auto;
+  .submenu.show,
+  .submenu-sub.show {
+    max-height: 600px;
     opacity: 1;
-    transform: translateY(0);
-  }
-
-  .mobile-sub-submenu {
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(8px);
-    padding: 0;
-    width: 100%;
-    height: 0;
-    opacity: 0;
-    transform: translateY(10px);
-    overflow: hidden;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 20;
-    transition: height 0.4s ease-in-out, opacity 0.4s ease-in-out,
-      transform 0.4s ease-in-out;
-    transition-delay: 0.1s;
-  }
-
-  .mobile-sub-submenu.show {
-    height: auto;
-    opacity: 1;
-    transform: translateY(0);
+    overflow: visible;
   }
 
   .sub-item,
   .sub-sub-item {
-    border-bottom: 1px solid #4b5563;
     cursor: pointer;
-  }
-
-  .sub-item:last-child,
-  .sub-sub-item:last-child {
-    border-bottom: none;
   }
 
   .sub-item a,
   .sub-sub-item a {
     font-size: 1rem;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.3s ease;
   }
 
   #mobile-men-toggle svg,
   #mobile-women-toggle svg,
   #mobile-men-clothing-toggle svg,
   #mobile-women-clothing-toggle svg {
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.35s ease-in-out;
     transform: rotate(0deg);
   }
 
@@ -329,12 +315,17 @@ header {
   #mobile-women-clothing-toggle.active svg {
     transform: rotate(180deg);
   }
+
+  #close-btn:hover svg {
+    stroke: #d1d5db;
+    transition: stroke 0.3s ease;
+  }
 }
 
-/* Style for close button in mobile menu */
-#burger-close-btn {
+/* Close button in mobile menu */
+#close-btn {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  z-index: 50;
+  z-index: 60;
 }

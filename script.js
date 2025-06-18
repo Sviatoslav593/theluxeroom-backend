@@ -1,49 +1,51 @@
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      try {
+        func(...args);
+      } catch (e) {
+        console.error("Error in debounced function:", e);
+      }
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
 function toggleMenu() {
   const menu = document.getElementById("mobile-menu");
   const burgerIcon = document.getElementById("burger-icon");
   const closeIcon = document.getElementById("close-icon");
   const body = document.body;
-  const menToggle = document.getElementById("mobile-men-toggle");
-  const womenToggle = document.getElementById("mobile-women-toggle");
-  const menClothingToggle = document.getElementById(
-    "mobile-men-clothing-toggle"
-  );
-  const womenClothingToggle = document.getElementById(
-    "mobile-women-clothing-toggle"
-  );
-
-  // Toggle menu visibility
-  menu.classList.toggle("translate-x-full");
-  // Toggle icons
-  burgerIcon.classList.toggle("hidden");
-  closeIcon.classList.toggle("hidden");
-  // Toggle body scroll lock
-  body.classList.toggle("menu-open");
-
-  // Reset all sub-menus when closing main menu
-  const submenus = [
+  const toggles = [
     {
       submenu: document.getElementById("mobile-men-submenu"),
-      toggle: menToggle,
+      toggle: document.getElementById("mobile-men-toggle"),
     },
     {
       submenu: document.getElementById("mobile-women-submenu"),
-      toggle: womenToggle,
+      toggle: document.getElementById("mobile-women-toggle"),
     },
     {
       submenu: document.getElementById("mobile-men-clothing-submenu"),
-      toggle: menClothingToggle,
+      toggle: document.getElementById("mobile-men-clothing-toggle"),
     },
     {
       submenu: document.getElementById("mobile-women-clothing-submenu"),
-      toggle: womenClothingToggle,
+      toggle: document.getElementById("mobile-women-clothing-toggle"),
     },
   ];
 
-  submenus.forEach(({ submenu, toggle }) => {
+  menu.classList.toggle("translate-x-full");
+  burgerIcon.classList.toggle("hidden");
+  closeIcon.classList.toggle("hidden");
+  body.classList.toggle("menu-open");
+
+  toggles.forEach(({ submenu, toggle }) => {
     if (submenu) {
       submenu.classList.remove("show");
-      submenu.style.height = "0px";
     }
     if (toggle) {
       toggle.classList.remove("active");
@@ -53,68 +55,60 @@ function toggleMenu() {
 
 function toggleSubmenu(event, submenuId, toggleId) {
   event.preventDefault();
-  event.stopPropagation(); // Prevent parent menu toggle
+  event.stopPropagation();
   const submenu = document.getElementById(submenuId);
   const toggle = document.getElementById(toggleId);
+  if (!submenu || !toggle) return;
 
   const isShowing = submenu.classList.contains("show");
+  const isTopLevel = !!submenu.closest(".mobile-menu-list");
 
-  if (!isShowing) {
-    // Close other sub-menus at the same level
-    const parentSubmenu = submenu.closest(".submenu-wrapper");
-    const siblingSubmenus = parentSubmenu
-      ? parentSubmenu.querySelectorAll(".mobile-submenu, .mobile-sub-submenu")
-      : document.querySelectorAll(".mobile-submenu, .mobile-sub-submenu");
-    const siblingToggles = parentSubmenu
-      ? parentSubmenu.querySelectorAll(".mobile-menu-link")
-      : document.querySelectorAll(".mobile-menu-link");
+  requestAnimationFrame(() => {
+    try {
+      if (!isShowing) {
+        // For sub-sub-menus (e.g., "Clothing" under "For Men"), close siblings
+        if (!isTopLevel) {
+          const parentSubmenu = submenu.closest(".submenu");
+          const siblingSubmenus =
+            parentSubmenu.querySelectorAll(".submenu-sub");
+          const siblingToggles = parentSubmenu.querySelectorAll(
+            ".sub-item > .mobile-menu-link"
+          );
+          siblingSubmenus.forEach((otherSubmenu) => {
+            if (
+              otherSubmenu !== submenu &&
+              otherSubmenu.classList.contains("show")
+            ) {
+              otherSubmenu.classList.remove("show");
+            }
+          });
+          siblingToggles.forEach((otherToggle) => {
+            if (
+              otherToggle !== toggle &&
+              otherToggle.classList.contains("active")
+            ) {
+              otherToggle.classList.remove("active");
+            }
+          });
+        }
 
-    siblingSubmenus.forEach((otherSubmenu) => {
-      if (otherSubmenu !== submenu && otherSubmenu.classList.contains("show")) {
-        otherSubmenu.classList.remove("show");
-        otherSubmenu.style.height = "0px";
-      }
-    });
-
-    siblingToggles.forEach((otherToggle) => {
-      if (otherToggle !== toggle && otherToggle.classList.contains("active")) {
-        otherToggle.classList.remove("active");
-      }
-    });
-
-    // Temporarily show submenu to calculate height
-    submenu.style.display = "block";
-    submenu.style.height = "auto";
-    const height = submenu.scrollHeight + "px";
-    submenu.style.height = "0px";
-    submenu.style.display = "";
-
-    // Force reflow to ensure transition starts
-    submenu.offsetHeight;
-
-    // Show submenu
-    submenu.classList.add("show");
-    submenu.style.height = height;
-  } else {
-    // Hide submenu
-    submenu.style.height = "0px";
-    submenu.addEventListener(
-      "transitionend",
-      function handler() {
+        // Open submenu
+        submenu.classList.add("show");
+      } else {
+        // Close submenu
         submenu.classList.remove("show");
-        submenu.removeEventListener("transitionend", handler);
-      },
-      { once: true }
-    );
-  }
+      }
 
-  toggle.classList.toggle("active");
+      toggle.classList.toggle("active");
+    } catch (e) {
+      console.error("Error in toggleSubmenu:", e);
+    }
+  });
 }
 
-// Initialize event listeners
 document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.getElementById("burger-open-btn");
-  const closeBtn = document.getElementById("burger-close-btn");
+  const closeBtn = document.getElementById("close-btn");
   const mobileMenu = document.getElementById("mobile-menu");
   const menToggle = document.getElementById("mobile-men-toggle");
   const womenToggle = document.getElementById("mobile-women-toggle");
@@ -128,22 +122,21 @@ document.addEventListener("DOMContentLoaded", () => {
     ".mobile-menu-link:not(#mobile-men-toggle, #mobile-women-toggle, #mobile-men-clothing-toggle, #mobile-women-clothing-toggle)"
   );
 
-  // Open/close main menu
   openBtn.addEventListener("click", toggleMenu);
   closeBtn.addEventListener("click", toggleMenu);
 
-  // Toggle sub-menus
+  const debouncedToggleSubmenu = debounce(toggleSubmenu, 100);
   if (menToggle)
     menToggle.addEventListener("click", (e) =>
-      toggleSubmenu(e, "mobile-men-submenu", "mobile-men-toggle")
+      debouncedToggleSubmenu(e, "mobile-men-submenu", "mobile-men-toggle")
     );
   if (womenToggle)
     womenToggle.addEventListener("click", (e) =>
-      toggleSubmenu(e, "mobile-women-submenu", "mobile-women-toggle")
+      debouncedToggleSubmenu(e, "mobile-women-submenu", "mobile-women-toggle")
     );
   if (menClothingToggle)
     menClothingToggle.addEventListener("click", (e) =>
-      toggleSubmenu(
+      debouncedToggleSubmenu(
         e,
         "mobile-men-clothing-submenu",
         "mobile-men-clothing-toggle"
@@ -151,21 +144,19 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   if (womenClothingToggle)
     womenClothingToggle.addEventListener("click", (e) =>
-      toggleSubmenu(
+      debouncedToggleSubmenu(
         e,
         "mobile-women-clothing-submenu",
         "mobile-women-clothing-toggle"
       )
     );
 
-  // Close menu when clicking non-toggle links
   mobileMenuLinks.forEach((link) => {
     link.addEventListener("click", () => {
       toggleMenu();
     });
   });
 
-  // Close menu when clicking outside
   mobileMenu.addEventListener("click", (e) => {
     if (e.target === mobileMenu) {
       toggleMenu();
@@ -173,7 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Simple hero slider simulation
 let currentSlide = 0;
 const slides = [
   "https://source.unsplash.com/random/1920x1080?dark-fashion",
@@ -181,7 +171,7 @@ const slides = [
 ];
 function changeSlide() {
   const hero = document.querySelector(".hero-bg");
-  hero.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('${slides[currentSlide]}')`;
+  hero.style.backgroundImage = `url('${slides[currentSlide]}')`;
   currentSlide = (currentSlide + 1) % slides.length;
 }
 setInterval(changeSlide, 5000);
