@@ -58,7 +58,10 @@ function toggleSubmenu(event, submenuId, toggleId) {
   event.stopPropagation();
   const submenu = document.getElementById(submenuId);
   const toggle = document.getElementById(toggleId);
-  if (!submenu || !toggle) return;
+  if (!submenu || !toggle) {
+    console.error(`Submenu or toggle not found: ${submenuId}, ${toggleId}`);
+    return;
+  }
 
   const isShowing = submenu.classList.contains("show");
   const isTopLevel = !!submenu.closest(".mobile-menu-list");
@@ -66,40 +69,41 @@ function toggleSubmenu(event, submenuId, toggleId) {
   requestAnimationFrame(() => {
     try {
       if (!isShowing) {
-        // For sub-sub-menus (e.g., "Clothing" under "For Men"), close siblings
         if (!isTopLevel) {
+          // For sub-sub-menus (e.g., "Clothing" under "For Men"), close sibling sub-sub-menus
           const parentSubmenu = submenu.closest(".submenu");
-          const siblingSubmenus =
-            parentSubmenu.querySelectorAll(".submenu-sub");
-          const siblingToggles = parentSubmenu.querySelectorAll(
-            ".sub-item > .mobile-menu-link"
-          );
-          siblingSubmenus.forEach((otherSubmenu) => {
-            if (
-              otherSubmenu !== submenu &&
-              otherSubmenu.classList.contains("show")
-            ) {
-              otherSubmenu.classList.remove("show");
-            }
-          });
-          siblingToggles.forEach((otherToggle) => {
-            if (
-              otherToggle !== toggle &&
-              otherToggle.classList.contains("active")
-            ) {
-              otherToggle.classList.remove("active");
-            }
-          });
+          if (parentSubmenu) {
+            const siblingSubmenus =
+              parentSubmenu.querySelectorAll(".submenu-sub");
+            const siblingToggles = parentSubmenu.querySelectorAll(
+              ".sub-item > .mobile-menu-link"
+            );
+            siblingSubmenus.forEach((otherSubmenu) => {
+              if (
+                otherSubmenu !== submenu &&
+                otherSubmenu.classList.contains("show")
+              ) {
+                otherSubmenu.classList.remove("show");
+              }
+            });
+            siblingToggles.forEach((otherToggle) => {
+              if (
+                otherToggle !== toggle &&
+                otherToggle.classList.contains("active")
+              ) {
+                otherToggle.classList.remove("active");
+              }
+            });
+          }
         }
-
-        // Open submenu
+        // Open the submenu
         submenu.classList.add("show");
+        toggle.classList.add("active");
       } else {
-        // Close submenu
+        // Close the submenu
         submenu.classList.remove("show");
+        toggle.classList.remove("active");
       }
-
-      toggle.classList.toggle("active");
     } catch (e) {
       console.error("Error in toggleSubmenu:", e);
     }
@@ -121,6 +125,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileMenuLinks = document.querySelectorAll(
     ".mobile-menu-link:not(#mobile-men-toggle, #mobile-women-toggle, #mobile-men-clothing-toggle, #mobile-women-clothing-toggle)"
   );
+
+  if (!openBtn || !closeBtn || !mobileMenu) {
+    console.error("Mobile menu elements not found");
+    return;
+  }
 
   openBtn.addEventListener("click", toggleMenu);
   closeBtn.addEventListener("click", toggleMenu);
@@ -167,11 +176,13 @@ document.addEventListener("DOMContentLoaded", () => {
 let currentSlide = 0;
 const slides = [
   "https://source.unsplash.com/random/1920x1080?dark-fashion",
-  "https://source.unsplash.com/random/1920x1080?fashion",
+  "https://source.unsplash.com/random/1920x1080?fashion-white",
 ];
 function changeSlide() {
   const hero = document.querySelector(".hero-bg");
-  hero.style.backgroundImage = `url('${slides[currentSlide]}')`;
-  currentSlide = (currentSlide + 1) % slides.length;
+  if (hero) {
+    hero.style.backgroundImage = `url('${slides[currentSlide]}')`;
+    currentSlide = (currentSlide + 1) % slides.length;
+  }
 }
 setInterval(changeSlide, 5000);

@@ -82,13 +82,15 @@ footer {
 
 .mobile-menu-link {
   position: relative;
-  transition: color 0.3s ease, background-color 0.3s ease;
+  transition: color 0.3s ease;
   background: transparent;
 }
 
-.mobile-menu-link:hover {
+.mobile-menu-link:hover,
+.mobile-menu-link:active,
+.mobile-menu-link:focus {
   color: #d1d5db;
-  background-color: #1f2937;
+  background: transparent;
 }
 
 .mobile-menu-link::after {
@@ -179,6 +181,7 @@ footer {
   background: #1a1a1a;
   border: 1px solid #4b5563;
   transition: transform 0.35s ease-in-out, box-shadow 0.35s ease-in-out;
+  position: relative;
 }
 
 .product-card:hover {
@@ -197,12 +200,19 @@ footer {
 
 .product-content {
   background: none;
+  padding: 1rem;
+}
+
+.product-content p {
+  text-align: left;
+  margin-top: 0.5rem;
 }
 
 .add-to-cart-wrapper {
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.35s ease-in-out, transform 0.35s ease-in-out;
+  margin-top: 1rem;
 }
 
 .product-card:hover .add-to-cart-wrapper {
@@ -218,6 +228,7 @@ footer {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
+  z-index: 1;
 }
 
 .add-to-cart:hover {
@@ -239,24 +250,43 @@ footer {
     box-shadow: none;
   }
 
+  .product-content p {
+    position: static;
+    margin-top: 0.5rem;
+    text-align: left;
+  }
+
   .add-to-cart-wrapper {
     opacity: 1 !important;
     transform: translateY(0) !important;
+    margin-top: 0.5rem;
+  }
+
+  .mobile-menu {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: block;
+    height: 100vh;
   }
 
   .mobile-menu-list {
-    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-top: 4rem;
   }
 
-  .mobile-menu-item {
+  .mobile-menu-item,
+  .sub-item,
+  .sub-sub-item {
     width: 100%;
     position: static;
+    text-align: center;
   }
 
   .mobile-menu-link {
@@ -288,11 +318,6 @@ footer {
     max-height: 600px;
     opacity: 1;
     overflow: visible;
-  }
-
-  .sub-item,
-  .sub-sub-item {
-    cursor: pointer;
   }
 
   .sub-item a,
