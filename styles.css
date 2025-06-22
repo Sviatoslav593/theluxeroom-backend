@@ -493,7 +493,7 @@ header .icons button {
 
 #filter-modal .modal-content {
   max-width: 90%;
-  margin: 4rem auto;
+  margin: 2rem auto; /* Зменшено верхній відступ до 2rem */
   background: #1a1a1a;
   padding: 1.5rem;
   border-radius: 12px;
@@ -502,8 +502,10 @@ header .icons button {
   position: relative;
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - 8rem); /* Висота екрана мінус маргін і padding */
-  overflow-y: hidden; /* Вимкнено прокручування */
+  max-height: calc(
+    100vh - 4rem
+  ); /* Висота екрана мінус верхній і нижній відступи (по 2rem) */
+  overflow-y: hidden;
 }
 
 #filter-modal h2 {
@@ -605,6 +607,6 @@ header .icons button {
 
 @media (max-width: 639px) {
   #filter-modal .modal-content {
-    max-height: calc(100vh - 8rem); /* Адаптивна висота для мобільних */
+    max-height: calc(100vh - 4rem); /* Адаптивна висота для мобільних */
   }
 }
