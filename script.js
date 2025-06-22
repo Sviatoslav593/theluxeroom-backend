@@ -150,7 +150,8 @@ function toggleFilterModal() {
 
   const isOpen = modal.classList.contains("active");
   modal.classList.toggle("active", !isOpen);
-  body.classList.toggle("filter-open", !isOpen);
+  body.classList.toggle("filter-open", !isOpen); // Додано клас для блокування прокручування
+  body.style.overflow = isOpen ? "auto" : "hidden"; // Блокуємо прокручування сторінки
 
   // Додаємо плавну анімацію
   if (isOpen) {
@@ -219,8 +220,8 @@ function filterProducts() {
   const productCards = document.querySelectorAll(".product-card");
 
   productCards.forEach((card) => {
-    const productColor = card.getAttribute("data-color") || ""; // Припустимо, що колір у data-атрибуті
-    const productSize = card.getAttribute("data-size") || ""; // Припустимо, що розмір у data-атрибуті
+    const productColor = card.getAttribute("data-color") || "";
+    const productSize = card.getAttribute("data-size") || "";
 
     const colorMatch =
       colorFilters.length === 0 || colorFilters.includes(productColor);
@@ -363,5 +364,5 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Hero slide changed:", currentSlide);
     }
   }
-  setInterval(changeSlide, 5000);
+  setTimeout(changeSlide, 5000);
 });

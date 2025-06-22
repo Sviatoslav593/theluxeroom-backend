@@ -3,7 +3,7 @@ body {
   font-family: "Poppins", sans-serif;
   background: linear-gradient(to bottom, #121212, #1a1a1a);
   color: #ffffff;
-  margin: 0; /* Прибираємо відступи по краях */
+  margin: 0;
   padding: 0;
 }
 
@@ -39,6 +39,10 @@ body {
 
 /* Disable scroll when mobile menu is open */
 body.menu-open {
+  overflow: hidden;
+}
+
+body.filter-open {
   overflow: hidden;
 }
 
@@ -223,7 +227,7 @@ header .icons button {
   border: 1px solid #4b5563;
   transition: transform 0.35s ease-in-out, box-shadow 0.35s ease-in-out;
   position: relative;
-  border-radius: 8px; /* Повертаємо заокруглення */
+  border-radius: 8px;
 }
 
 .product-card:hover {
@@ -257,7 +261,7 @@ header .icons button {
   transform: translateY(10px);
   transition: opacity 0.35s ease-in-out, transform 0.35s ease-in-out;
   margin-top: 1rem;
-  width: 100%; /* Розширюємо кнопку на всю ширину */
+  width: 100%;
 }
 
 .product-card:hover .add-to-cart-wrapper {
@@ -269,13 +273,13 @@ header .icons button {
   background: #000000;
   color: #ffffff;
   padding: 0.5rem 1rem;
-  width: 100%; /* Гарантуємо, що кнопка займає всю ширину */
-  border-radius: 4px; /* Легке заокруглення */
+  width: 100%;
+  border-radius: 4px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
   z-index: 1;
-  display: block; /* Гарантуємо правильне відображення */
-  text-align: center; /* Центруємо текст */
+  display: block;
+  text-align: center;
 }
 
 .add-to-cart:hover {
@@ -408,7 +412,7 @@ header .icons button {
   }
 
   .mobile-menu.active #close-btn {
-    display: block; /* Гарантуємо видимість кнопки при відкритому меню */
+    display: block;
   }
 }
 
@@ -418,7 +422,7 @@ header .icons button {
     display: none !important;
   }
   #burger-open-btn {
-    display: none !important; /* Прибираємо кнопку на десктопі */
+    display: none !important;
   }
 }
 
@@ -444,7 +448,7 @@ header .icons button {
 
 /* Burger button styles */
 #burger-open-btn {
-  display: block; /* Гарантуємо видимість за замовчуванням на мобільних */
+  display: block;
 }
 
 /* Close button in mobile menu */
@@ -465,7 +469,7 @@ header .icons button {
 
 /* Filter Modal Styles */
 #filter-btn {
-  display: block; /* Гарантуємо, що кнопка відображається */
+  display: block;
 }
 
 #filter-modal {
@@ -477,7 +481,7 @@ header .icons button {
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(8px);
   transform: translateX(100%);
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Плавна анімація */
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   z-index: 100;
   opacity: 0;
 }
@@ -496,59 +500,86 @@ header .icons button {
   border: 1px solid #4b5563;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   position: relative;
-  display: flex; /* Використано flexbox для позиціонування */
+  display: flex;
   flex-direction: column;
+  max-height: calc(100vh - 8rem); /* Висота екрана мінус маргін і padding */
+  overflow-y: hidden; /* Вимкнено прокручування */
 }
 
 #filter-modal h2 {
   font-size: 1.75rem;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   color: #d1d5db;
 }
 
 #filter-modal .close-btn {
-  margin-left: auto; /* Переміщуємо кнопку вправо */
+  margin-left: auto;
   background: none;
   border: none;
   color: #ffffff;
   font-size: 1.5rem;
   cursor: pointer;
   transition: color 0.3s ease;
-  padding: 0.5rem; /* Додано відступи для кращого вигляду */
-  align-self: flex-start; /* Вирівнюємо по початку контейнера */
+  padding: 0.5rem;
+  align-self: flex-start;
 }
 
 #filter-modal .close-btn:hover {
-  color: #d1d5db; /* Залишаємо лише зміну кольору */
-  background: none; /* Прибираємо фон при наведенні */
+  color: #d1d5db;
+  background: none;
 }
 
 #filter-modal label {
-  display: block;
-  margin: 0.75rem 0;
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
   color: #9ca3af;
-  font-size: 1rem;
-  cursor: pointer; /* Додано поінтер для етикеток */
+  font-size: 0.9rem;
+  cursor: pointer;
 }
 
 #filter-modal input[type="checkbox"] {
-  margin-right: 0.75rem;
-  cursor: pointer; /* Додано поінтер для чекбоксів */
+  margin-right: 0.5rem;
+  cursor: pointer;
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #4b5563;
+  border-radius: 3px;
+  position: relative;
+  background: #2d2d2d;
+}
+
+#filter-modal input[type="checkbox"]:checked::before {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 0.8rem;
+}
+
+#filter-modal .filter-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 #filter-modal select,
 #filter-modal button {
   width: 100%;
-  margin: 0.75rem 0;
-  padding: 0.75rem;
+  margin: 0.5rem 0;
+  padding: 0.6rem;
   border-radius: 6px;
   border: 1px solid #4b5563;
   background: #2d2d2d;
   color: #ffffff;
-  font-size: 1rem;
+  font-size: 0.9rem;
   transition: background-color 0.3s ease, border-color 0.3s ease;
-  cursor: pointer; /* Додано поінтер для селектів і кнопок */
+  cursor: pointer;
 }
 
 #filter-modal select:focus,
@@ -564,4 +595,16 @@ header .icons button {
 
 #filter-modal button:hover {
   background: #1f2937;
+}
+
+@media (min-width: 640px) {
+  #filter-modal .filter-group {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  #filter-modal .modal-content {
+    max-height: calc(100vh - 8rem); /* Адаптивна висота для мобільних */
+  }
 }
