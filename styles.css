@@ -492,19 +492,26 @@ header .icons button {
 }
 
 #filter-modal .modal-content {
-  max-width: 90%;
-  margin: 2rem auto;
-  background: #1a1a1a;
+  min-width: 300px; /* Додано мінімальну ширину для уникнення вузькості */
+  max-width: 90%; /* Повернено попередню максимальну ширину */
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.85); /* Напівпрозорий чорний фон */
   padding: 1.5rem;
   border-radius: 12px;
   border: 1px solid #4b5563;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  position: relative;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Центрування по горизонталі та вертикалі */
   display: flex;
   flex-direction: column;
-  max-height: calc(80vh - 4rem);
-  overflow-y: auto; /* Додано прокручування */
-  -webkit-overflow-scrolling: touch; /* Покращення прокручування на iOS */
+  max-height: 90vh; /* Збільшено висоту для кращої видимості вмісту */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 #filter-modal h2 {
@@ -606,6 +613,6 @@ header .icons button {
 
 @media (max-width: 639px) {
   #filter-modal .modal-content {
-    max-height: calc(80vh - 4rem);
+    max-height: 90vh;
   }
 }
