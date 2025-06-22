@@ -3,6 +3,8 @@ body {
   font-family: "Poppins", sans-serif;
   background: linear-gradient(to bottom, #121212, #1a1a1a);
   color: #ffffff;
+  margin: 0; /* Прибираємо відступи по краях */
+  padding: 0;
 }
 
 .backdrop-blur {
@@ -40,16 +42,55 @@ body.menu-open {
   overflow: hidden;
 }
 
-/* Header with solid black */
+/* Header with solid black, fixed at top */
 header {
   background: #000000;
   border-bottom: 1px solid #4b5563;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
 }
 
-/* Footer with solid black */
-footer {
-  background: #000000;
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+header .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+header .nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+header .nav-links li {
+  margin-left: 1rem;
+}
+
+header .nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+header .icons {
+  display: flex;
+  align-items: center;
+}
+
+header .icons a,
+header .icons button {
+  margin-left: 1rem;
+  color: #ffffff;
 }
 
 /* Animated header links */
@@ -182,6 +223,7 @@ footer {
   border: 1px solid #4b5563;
   transition: transform 0.35s ease-in-out, box-shadow 0.35s ease-in-out;
   position: relative;
+  border-radius: 8px; /* Повертаємо заокруглення */
 }
 
 .product-card:hover {
@@ -196,6 +238,8 @@ footer {
   width: 100%;
   height: 12rem;
   object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 .product-content {
@@ -213,6 +257,7 @@ footer {
   transform: translateY(10px);
   transition: opacity 0.35s ease-in-out, transform 0.35s ease-in-out;
   margin-top: 1rem;
+  width: 100%; /* Розширюємо кнопку на всю ширину */
 }
 
 .product-card:hover .add-to-cart-wrapper {
@@ -224,11 +269,13 @@ footer {
   background: #000000;
   color: #ffffff;
   padding: 0.5rem 1rem;
-  width: 100%;
-  border-radius: 8px;
+  width: 100%; /* Гарантуємо, що кнопка займає всю ширину */
+  border-radius: 4px; /* Легке заокруглення */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
   z-index: 1;
+  display: block; /* Гарантуємо правильне відображення */
+  text-align: center; /* Центруємо текст */
 }
 
 .add-to-cart:hover {
@@ -263,10 +310,23 @@ footer {
   }
 
   .mobile-menu {
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    visibility: hidden;
+    transform: translateX(100%);
+    transition: visibility 0s linear 0.3s, transform 0.3s ease-in-out;
+  }
+
+  .mobile-menu.active {
+    visibility: visible;
+    transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
   }
 
   .mobile-menu-list {
@@ -295,6 +355,7 @@ footer {
     align-items: center;
     font-weight: 400;
     justify-content: space-between;
+    padding: 1rem;
   }
 
   .mobile-menu-link.text-2xl {
@@ -345,6 +406,45 @@ footer {
     stroke: #d1d5db;
     transition: stroke 0.3s ease;
   }
+
+  .mobile-menu.active #close-btn {
+    display: block; /* Гарантуємо видимість кнопки при відкритому меню */
+  }
+}
+
+/* Hide mobile menu on desktop by default */
+@media (min-width: 640px) {
+  #mobile-menu {
+    display: none !important;
+  }
+  #burger-open-btn {
+    display: none !important; /* Прибираємо кнопку на десктопі */
+  }
+}
+
+/* Ensure header elements are visible on desktop and hidden on mobile */
+@media (max-width: 639px) {
+  header .nav-links {
+    display: none;
+  }
+  header .icons a,
+  header .icons button:not(#burger-open-btn) {
+    display: none;
+  }
+}
+
+@media (min-width: 640px) {
+  header .nav-links {
+    display: flex !important;
+  }
+  header .icons {
+    display: flex !important;
+  }
+}
+
+/* Burger button styles */
+#burger-open-btn {
+  display: block; /* Гарантуємо видимість за замовчуванням на мобільних */
 }
 
 /* Close button in mobile menu */
@@ -353,4 +453,115 @@ footer {
   top: 1rem;
   right: 1rem;
   z-index: 60;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Filter Modal Styles */
+#filter-btn {
+  display: block; /* Гарантуємо, що кнопка відображається */
+}
+
+#filter-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Плавна анімація */
+  z-index: 100;
+  opacity: 0;
+}
+
+#filter-modal.active {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+#filter-modal .modal-content {
+  max-width: 90%;
+  margin: 4rem auto;
+  background: #1a1a1a;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #4b5563;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  position: relative;
+  display: flex; /* Використано flexbox для позиціонування */
+  flex-direction: column;
+}
+
+#filter-modal h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #d1d5db;
+}
+
+#filter-modal .close-btn {
+  margin-left: auto; /* Переміщуємо кнопку вправо */
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 0.5rem; /* Додано відступи для кращого вигляду */
+  align-self: flex-start; /* Вирівнюємо по початку контейнера */
+}
+
+#filter-modal .close-btn:hover {
+  color: #d1d5db; /* Залишаємо лише зміну кольору */
+  background: none; /* Прибираємо фон при наведенні */
+}
+
+#filter-modal label {
+  display: block;
+  margin: 0.75rem 0;
+  color: #9ca3af;
+  font-size: 1rem;
+  cursor: pointer; /* Додано поінтер для етикеток */
+}
+
+#filter-modal input[type="checkbox"] {
+  margin-right: 0.75rem;
+  cursor: pointer; /* Додано поінтер для чекбоксів */
+}
+
+#filter-modal select,
+#filter-modal button {
+  width: 100%;
+  margin: 0.75rem 0;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #4b5563;
+  background: #2d2d2d;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  cursor: pointer; /* Додано поінтер для селектів і кнопок */
+}
+
+#filter-modal select:focus,
+#filter-modal button:focus {
+  outline: none;
+  background-color: #3d3d2d;
+  border-color: #6b7280;
+}
+
+#filter-modal button {
+  background: #000000;
+}
+
+#filter-modal button:hover {
+  background: #1f2937;
 }

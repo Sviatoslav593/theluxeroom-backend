@@ -16,8 +16,8 @@ function debounce(func, wait) {
 
 function toggleMenu() {
   const menu = document.getElementById("mobile-menu");
-  const burgerIcon = document.getElementById("burger-icon");
-  const closeIcon = document.getElementById("close-icon");
+  const burgerBtn = document.getElementById("burger-open-btn");
+  const closeBtn = document.getElementById("close-btn");
   const body = document.body;
   const toggles = [
     {
@@ -38,18 +38,39 @@ function toggleMenu() {
     },
   ];
 
-  menu.classList.toggle("translate-x-full");
-  burgerIcon.classList.toggle("hidden");
-  closeIcon.classList.toggle("hidden");
-  body.classList.toggle("menu-open");
+  console.log("ToggleMenu called:", { menu, burgerBtn, closeBtn });
+
+  if (!menu || !burgerBtn || !closeBtn) {
+    console.error("Mobile menu elements not found:", {
+      menu,
+      burgerBtn,
+      closeBtn,
+    });
+    return;
+  }
+
+  const isOpen = menu.classList.contains("active");
+  menu.classList.toggle("active", !isOpen);
+  if (isOpen) {
+    burgerBtn.style.display = "block"; // Показуємо кнопку при закритті
+    closeBtn.style.display = "none";
+  } else {
+    burgerBtn.style.display = "none"; // Приховуємо кнопку при відкритті
+    closeBtn.style.display = "block";
+  }
+  body.classList.toggle("menu-open", !isOpen);
+
+  console.log("Menu toggled:", {
+    isOpen: !isOpen,
+    menuClass: menu.classList,
+    bodyClass: body.classList,
+    burgerDisplay: burgerBtn.style.display,
+    closeDisplay: closeBtn.style.display,
+  });
 
   toggles.forEach(({ submenu, toggle }) => {
-    if (submenu) {
-      submenu.classList.remove("show");
-    }
-    if (toggle) {
-      toggle.classList.remove("active");
-    }
+    if (submenu) submenu.classList.remove("show");
+    if (toggle) toggle.classList.remove("active");
   });
 }
 
@@ -58,6 +79,14 @@ function toggleSubmenu(event, submenuId, toggleId) {
   event.stopPropagation();
   const submenu = document.getElementById(submenuId);
   const toggle = document.getElementById(toggleId);
+
+  console.log("ToggleSubmenu called:", {
+    submenuId,
+    toggleId,
+    submenu,
+    toggle,
+  });
+
   if (!submenu || !toggle) {
     console.error(`Submenu or toggle not found: ${submenuId}, ${toggleId}`);
     return;
@@ -70,7 +99,6 @@ function toggleSubmenu(event, submenuId, toggleId) {
     try {
       if (!isShowing) {
         if (!isTopLevel) {
-          // For sub-sub-menus (e.g., "Clothing" under "For Men"), close sibling sub-sub-menus
           const parentSubmenu = submenu.closest(".submenu");
           if (parentSubmenu) {
             const siblingSubmenus =
@@ -96,21 +124,116 @@ function toggleSubmenu(event, submenuId, toggleId) {
             });
           }
         }
-        // Open the submenu
         submenu.classList.add("show");
         toggle.classList.add("active");
       } else {
-        // Close the submenu
         submenu.classList.remove("show");
         toggle.classList.remove("active");
       }
+      console.log(`Submenu ${submenuId} toggled, show: ${!isShowing}`);
     } catch (e) {
       console.error("Error in toggleSubmenu:", e);
     }
   });
 }
 
+function toggleFilterModal() {
+  const modal = document.getElementById("filter-modal");
+  const body = document.body;
+
+  console.log("ToggleFilterModal called:", { modal });
+
+  if (!modal) {
+    console.error("Filter modal not found");
+    return;
+  }
+
+  const isOpen = modal.classList.contains("active");
+  modal.classList.toggle("active", !isOpen);
+  body.classList.toggle("filter-open", !isOpen);
+
+  // Додаємо плавну анімацію
+  if (isOpen) {
+    modal.style.opacity = "0";
+    setTimeout(() => {
+      modal.style.display = "none";
+    }, 300); // Час анімації 0.3s
+  } else {
+    modal.style.display = "block";
+    setTimeout(() => {
+      modal.style.opacity = "1";
+    }, 10); // Негайно показуємо, потім анімуємо
+  }
+
+  console.log("Filter modal toggled:", {
+    isOpen: !isOpen,
+    modalClass: modal.classList,
+    bodyClass: body.classList,
+  });
+}
+
+// Функція для сортування товарів
+function sortProducts(sortBy) {
+  const productCards = Array.from(document.querySelectorAll(".product-card"));
+  const container = document.querySelector("#product-grid");
+
+  productCards.sort((a, b) => {
+    const priceA = parseFloat(
+      a.querySelector("p").textContent.replace("$", "")
+    );
+    const priceB = parseFloat(
+      b.querySelector("p").textContent.replace("$", "")
+    );
+
+    switch (sortBy) {
+      case "price-asc":
+        return priceA - priceB;
+      case "price-desc":
+        return priceB - priceA;
+      case "newest":
+      default:
+        return 0; // Для "newest" зберігаємо поточний порядок
+    }
+  });
+
+  // Оновлюємо DOM
+  productCards.forEach((card) => container.appendChild(card));
+}
+
+// Функція для фільтрації товарів
+function filterProducts() {
+  const colorFilters = Array.from(
+    document.querySelectorAll(
+      "#filter-modal input[type='checkbox'][value^='color-']"
+    )
+  )
+    .filter((cb) => cb.checked)
+    .map((cb) => cb.value.replace("color-", ""));
+  const sizeFilters = Array.from(
+    document.querySelectorAll(
+      "#filter-modal input[type='checkbox'][value^='size-']"
+    )
+  )
+    .filter((cb) => cb.checked)
+    .map((cb) => cb.value.replace("size-", ""));
+  const productCards = document.querySelectorAll(".product-card");
+
+  productCards.forEach((card) => {
+    const productColor = card.getAttribute("data-color") || ""; // Припустимо, що колір у data-атрибуті
+    const productSize = card.getAttribute("data-size") || ""; // Припустимо, що розмір у data-атрибуті
+
+    const colorMatch =
+      colorFilters.length === 0 || colorFilters.includes(productColor);
+    const sizeMatch =
+      sizeFilters.length === 0 || sizeFilters.includes(productSize);
+
+    card.style.display = colorMatch && sizeMatch ? "block" : "none";
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM loaded, initializing scripts");
+
   const openBtn = document.getElementById("burger-open-btn");
   const closeBtn = document.getElementById("close-btn");
   const mobileMenu = document.getElementById("mobile-menu");
@@ -125,14 +248,38 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileMenuLinks = document.querySelectorAll(
     ".mobile-menu-link:not(#mobile-men-toggle, #mobile-women-toggle, #mobile-men-clothing-toggle, #mobile-women-clothing-toggle)"
   );
+  const filterBtn = document.getElementById("filter-btn");
+  const filterCloseBtn = document.getElementById("filter-close-btn");
+  const filterApplyBtn = document.getElementById("filter-apply-btn");
+  const sortSelect = document.querySelector("#filter-modal select");
+  const colorCheckboxes = document.querySelectorAll(
+    "#filter-modal input[type='checkbox'][value^='color-']"
+  );
+  const sizeCheckboxes = document.querySelectorAll(
+    "#filter-modal input[type='checkbox'][value^='size-']"
+  );
 
-  if (!openBtn || !closeBtn || !mobileMenu) {
-    console.error("Mobile menu elements not found");
-    return;
+  if (openBtn && closeBtn && mobileMenu) {
+    console.log("Adding mobile menu event listeners:", {
+      openBtn,
+      closeBtn,
+      mobileMenu,
+    });
+    openBtn.addEventListener("click", toggleMenu);
+    closeBtn.addEventListener("click", toggleMenu); // Перевірка події
+    mobileMenu.addEventListener("click", (e) => {
+      if (e.target === mobileMenu) {
+        console.log("Mobile menu background clicked");
+        toggleMenu();
+      }
+    });
+  } else {
+    console.error("Mobile menu elements not found:", {
+      openBtn,
+      closeBtn,
+      mobileMenu,
+    });
   }
-
-  openBtn.addEventListener("click", toggleMenu);
-  closeBtn.addEventListener("click", toggleMenu);
 
   const debouncedToggleSubmenu = debounce(toggleSubmenu, 100);
   if (menToggle)
@@ -162,27 +309,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
   mobileMenuLinks.forEach((link) => {
     link.addEventListener("click", () => {
+      console.log("Mobile menu link clicked:", link.textContent);
       toggleMenu();
     });
   });
 
-  mobileMenu.addEventListener("click", (e) => {
-    if (e.target === mobileMenu) {
-      toggleMenu();
-    }
-  });
-});
-
-let currentSlide = 0;
-const slides = [
-  "https://source.unsplash.com/random/1920x1080?dark-fashion",
-  "https://source.unsplash.com/random/1920x1080?fashion-white",
-];
-function changeSlide() {
-  const hero = document.querySelector(".hero-bg");
-  if (hero) {
-    hero.style.backgroundImage = `url('${slides[currentSlide]}')`;
-    currentSlide = (currentSlide + 1) % slides.length;
+  if (filterBtn && filterCloseBtn && filterApplyBtn) {
+    console.log("Adding filter modal event listeners:", {
+      filterBtn,
+      filterCloseBtn,
+      filterApplyBtn,
+    });
+    filterBtn.addEventListener("click", toggleFilterModal);
+    filterCloseBtn.addEventListener("click", toggleFilterModal);
+    filterApplyBtn.addEventListener("click", () => {
+      toggleFilterModal();
+      filterProducts(); // Застосовуємо фільтри при натисканні Apply
+    });
+  } else {
+    console.error("Filter elements not found:", {
+      filterBtn,
+      filterCloseBtn,
+      filterApplyBtn,
+    });
   }
-}
-setInterval(changeSlide, 5000);
+
+  // Додаємо обробник для сортування
+  if (sortSelect) {
+    sortSelect.addEventListener("change", (e) => {
+      console.log("Sort changed to:", e.target.value);
+      sortProducts(e.target.value);
+    });
+  } else {
+    console.error("Sort select not found");
+  }
+
+  // Додаємо обробник для фільтрів
+  colorCheckboxes.forEach((cb) =>
+    cb.addEventListener("change", filterProducts)
+  );
+  sizeCheckboxes.forEach((cb) => cb.addEventListener("change", filterProducts));
+
+  let currentSlide = 0;
+  const slides = [
+    "https://source.unsplash.com/random/1920x1080?dark-fashion",
+    "https://source.unsplash.com/random/1920x1080?fashion-white",
+  ];
+  function changeSlide() {
+    const hero = document.querySelector(".hero-bg");
+    if (hero) {
+      hero.style.backgroundImage = `url('${slides[currentSlide]}')`;
+      currentSlide = (currentSlide + 1) % slides.length;
+      console.log("Hero slide changed:", currentSlide);
+    }
+  }
+  setInterval(changeSlide, 5000);
+});
