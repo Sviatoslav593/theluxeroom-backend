@@ -1997,5 +1997,6 @@ header .icons button {
   #product-modal .add-to-cart {
     padding: 0.5rem;
     font-size: 1rem;
+    width: 100%;
   }
 }
