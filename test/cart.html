@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Black Boutique</title>
+    <title>Cart - Black Boutique</title>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
@@ -12,7 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style1.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body class="flex flex-col min-h-screen">
     <header>
@@ -20,12 +20,12 @@
         class="container mx-auto px-4 py-6 flex justify-between items-center"
       >
         <div class="logo">
-          <a href="./index1.html" class="text-white text-2xl font-bold"
+          <a href="./index.html" class="text-white text-2xl font-bold"
             >Black Boutique</a
           >
         </div>
         <ul class="nav-links hidden md:flex space-x-8 items-center">
-          <li><a href="./index1.html" class="nav-link">Home</a></li>
+          <li><a href="./index.html" class="nav-link">Home</a></li>
           <li class="group relative">
             <a href="#" class="nav-link flex items-center">
               For Men
@@ -71,7 +71,7 @@
                 >
                   <li>
                     <a
-                      href="../mens-tshirts.html"
+                      href="mens-tshirts.html"
                       class="nav-link block px-4 py-2 hover:bg-black/24 rounded-t-lg"
                       >T-shirts</a
                     >
@@ -242,22 +242,26 @@
             </svg>
           </a>
           <!-- CART BUTTON -->
-          <a href="./cart1.html" class="text-white" id="cart-btn"
-            ><svg
-              class="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          <div class="icons">
+            <a href="cart.html" id="cart-icon"
+              ><svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                ></path>
+              </svg>
+              <span id="cart-count">0</span></a
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-              ></path></svg
-          ></a>
+          </div>
           <!-- CART BUTTON -->
-          <a
+          <!-- <a
             href="./cart1.html"
             class="text-white"
             id="mobile-cart-btn"
@@ -274,7 +278,7 @@
                 stroke-width="2"
                 d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
               ></path></svg
-          ></a>
+          ></a> -->
           <button
             id="burger-open-btn"
             class="md:hidden text-white focus:outline-none"
@@ -308,7 +312,7 @@
         class="mobile-menu-list flex flex-col justify-start items-start w-full h-full overflow-y-auto pt-24 px-4"
       >
         <a
-          href="#"
+          href="./index.html"
           class="mobile-menu-link w-full py-2 text-lg border-b border-gray-700"
           >Home</a
         >
@@ -421,360 +425,16 @@
       </div>
     </div>
 
-    <main class="flex-grow pt-0 mt-16">
-      <section
-        class="hero-bg h-96 flex items-center justify-center text-center"
-      >
-        <div class="bg-black/85 p-8 rounded-lg">
-          <h1 class="text-4xl md:text-6xl font-bold mb-4">
-            Elevate Your Style
-          </h1>
-          <p class="text-lg md:text-xl mb-6">
-            Discover premium fashion at Black Boutique
-          </p>
-          <a href="#" class="btn-anim shop-now text-black">Shop Now</a>
-        </div>
-      </section>
-
-      <section class="container mx-auto px-4 py-12 bg-gray-950">
-        <h2 class="text-3xl font-bold text-center mb-8">Products</h2>
-        <div class="flex justify-between items-center mb-6">
-          <div></div>
-          <button
-            id="filter-btn"
-            class="bg-black/85 text-white font-semibold py-2 px-4 rounded-lg hover:bg-black/95 transition-all duration-300"
-          >
-            ⚙️ Filters
-          </button>
-        </div>
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6" id="product-grid">
-          <div
-            class="product-card"
-            data-product-id="1"
-            data-color="black"
-            data-size="s"
-          >
-            <img
-              src="./vuitton.webp"
-              alt="Amiri T-Shirt"
-              class="product-img w-full h-48 object-cover rounded-t-lg"
-            />
-            <div class="product-content p-4">
-              <h3>Balenciaga T-Shirt</h3>
-              <p>$50</p>
-              <div
-                class="add-to-cart-wrapper opacity-0 transform translate-y-2 transition-opacity duration-300 ease-in-out mt-4 w-full"
-              >
-                <button
-                  class="add-to-cart bg-black text-white px-4 py-2 w-full rounded shadow-md transition-colors hover:bg-gray-700"
-                >
-                  View Details
-                </button>
-              </div>
-            </div>
-            <div class="thumbnails-container">
-              <img src="./vuitton.webp" alt="Thumbnail 1" class="thumbnail" />
-              <img
-                src="../balenciaga2.jpeg"
-                alt="Thumbnail 2"
-                class="thumbnail"
-              />
-              <img src="./vuitton.webp" alt="Thumbnail 3" class="thumbnail" />
-            </div>
-          </div>
-          <div
-            class="product-card"
-            data-product-id="2"
-            data-color="black"
-            data-size="m"
-          >
-            <img
-              src="../balenciaga2.jpeg"
-              alt="Amiri T-Shirt"
-              class="product-img w-full h-48 object-cover rounded-t-lg"
-            />
-            <div class="product-content p-4">
-              <h3>Amiri T-Shirt</h3>
-              <p>$52</p>
-              <div
-                class="add-to-cart-wrapper opacity-0 transform translate-y-2 transition-opacity duration-300 ease-in-out mt-4 w-full"
-              >
-                <button
-                  class="add-to-cart bg-black text-white px-4 py-2 w-full rounded shadow-md transition-colors hover:bg-gray-700"
-                >
-                  View Details
-                </button>
-              </div>
-            </div>
-            <div class="thumbnails-container hidden">
-              <img src="./vuitton.webp" alt="Thumbnail 1" class="thumbnail" />
-              <img
-                src="../balenciaga2.jpeg"
-                alt="Thumbnail 2"
-                class="thumbnail"
-              />
-              <img src="./vuitton.webp" alt="Thumbnail 3" class="thumbnail" />
-            </div>
-          </div>
-          <div
-            class="product-card"
-            data-product-id="3"
-            data-color="grey"
-            data-size="l"
-          >
-            <img
-              src="./vuitton.webp"
-              alt="Amiri T-Shirt"
-              class="product-img w-full h-48 object-cover rounded-t-lg"
-            />
-            <div class="product-content p-4">
-              <h3>Amiri T-Shirt</h3>
-              <p>$69</p>
-              <div
-                class="add-to-cart-wrapper opacity-0 transform translate-y-2 transition-opacity duration-300 ease-in-out mt-4 w-full"
-              >
-                <button
-                  class="add-to-cart bg-black text-white px-4 py-2 w-full rounded shadow-md transition-colors hover:bg-gray-700"
-                >
-                  View Details
-                </button>
-              </div>
-            </div>
-            <div class="thumbnails-container">
-              <img src="./vuitton.webp" alt="Thumbnail 1" class="thumbnail" />
-              <img
-                src="../balenciaga2.jpeg"
-                alt="Thumbnail 2"
-                class="thumbnail"
-              />
-              <img src="./vuitton.webp" alt="Thumbnail 3" class="thumbnail" />
-            </div>
-          </div>
-          <div
-            class="product-card"
-            data-product-id="4"
-            data-color="blue"
-            data-size="xl"
-          >
-            <img
-              src="./vuitton.webp"
-              alt="Amiri T-Shirt"
-              class="product-img w-full h-48 object-cover rounded-t-lg"
-            />
-            <div class="product-content p-4">
-              <h3>Amiri T-Shirt</h3>
-              <p>$35</p>
-              <div
-                class="add-to-cart-wrapper opacity-0 transform translate-y-2 transition-opacity duration-300 ease-in-out mt-4 w-full"
-              >
-                <button
-                  class="add-to-cart bg-black text-white px-4 py-2 w-full rounded shadow-md transition-colors hover:bg-gray-700"
-                >
-                  View Details
-                </button>
-              </div>
-            </div>
-            <div class="thumbnails-container">
-              <img src="./vuitton.webp" alt="Thumbnail 1" class="thumbnail" />
-              <img
-                src="../balenciaga2.jpeg"
-                alt="Thumbnail 2"
-                class="thumbnail"
-              />
-              <img src="./vuitton.webp" alt="Thumbnail 3" class="thumbnail" />
-            </div>
-          </div>
+    <main>
+      <section class="cart-section">
+        <h1 class="cart-title">Your Cart</h1>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-summary">
+          <p class="total">Total: $<span id="cart-total">0.00</span></p>
+          <button class="btn-anim checkout-btn">Proceed to Checkout</button>
         </div>
       </section>
     </main>
-
-    <div
-      id="filter-modal"
-      class="fixed inset-0 bg-black bg-opacity-85 backdrop-blur-md z-40 hidden items-center justify-center opacity-0 transition-opacity duration-500 ease-in-out"
-    >
-      <button
-        id="filter-close-btn"
-        class="absolute top-4 right-4 text-white text-2xl hover:text-gray-300 transition-colors"
-      >
-        ×
-      </button>
-      <div
-        class="modal-content bg-gray-900 p-6 rounded-xl shadow-lg max-w-4xl max-h-[85vh] overflow-y-auto border border-gray-700"
-      >
-        <h2>Filters & Sort</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="filter-section">
-            <h3>Color</h3>
-            <div class="filter-group space-y-3">
-              <label class="flex items-center"
-                ><input
-                  type="checkbox"
-                  value="color-black"
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
-                />
-                Black</label
-              >
-              <label class="flex items-center"
-                ><input
-                  type="checkbox"
-                  value="color-grey"
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
-                />
-                Grey</label
-              >
-              <label class="flex items-center"
-                ><input
-                  type="checkbox"
-                  value="color-white"
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
-                />
-                White</label
-              >
-              <label class="flex items-center"
-                ><input
-                  type="checkbox"
-                  value="color-blue"
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
-                />
-                Blue</label
-              >
-            </div>
-          </div>
-          <div class="filter-section">
-            <h3>Size</h3>
-            <div class="filter-group space-y-3">
-              <label class="flex items-center"
-                ><input
-                  type="checkbox"
-                  value="size-s"
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
-                />
-                S</label
-              >
-              <label class="flex items-center"
-                ><input
-                  type="checkbox"
-                  value="size-m"
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
-                />
-                M</label
-              >
-              <label class="flex items-center"
-                ><input
-                  type="checkbox"
-                  value="size-l"
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
-                />
-                L</label
-              >
-              <label class="flex items-center"
-                ><input
-                  type="checkbox"
-                  value="size-xl"
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
-                />
-                XL</label
-              >
-            </div>
-          </div>
-          <div class="sort-section">
-            <h3>Sort By</h3>
-            <select
-              id="sort-select"
-              class="w-full p-3 rounded-lg border border-gray-600 bg-gray-800 text-gray-200 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="newest">Newest First</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-            </select>
-            <button
-              id="filter-apply-btn"
-              class="w-full py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors duration-300"
-            >
-              Apply
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Product Modal -->
-    <div
-      id="product-modal"
-      class="fixed inset-0 bg-black bg-opacity-85 backdrop-blur-md z-50 hidden items-center justify-center opacity-0 transition-opacity duration-500 ease-in-out"
-    >
-      <div
-        class="modal-content bg-gray-900 border border-gray-700 rounded-xl p-6 max-w-4xl max-h-[90vh] overflow-y-auto relative shadow-lg flex flex-col md:flex-row"
-      >
-        <div class="product-images flex-shrink-0 mb-4 md:mb-0 md:mr-6">
-          <img
-            id="main-image"
-            src="./vuitton.webp"
-            alt="Product Image"
-            class="main-image w-full max-w-xs h-auto rounded-lg"
-          />
-          <div class="thumbnail-images flex gap-2 mt-2">
-            <img
-              src="../balenciaga2.jpeg"
-              alt="Thumbnail 1"
-              class="thumbnail w-16 h-16 object-cover rounded cursor-pointer border-2 border-transparent"
-            />
-            <img
-              src="./vuitton.webp"
-              alt="Thumbnail 2"
-              class="thumbnail w-16 h-16 object-cover rounded cursor-pointer border-2 border-transparent"
-            />
-            <img
-              src="../balenciaga2.jpeg"
-              alt="Thumbnail 3"
-              class="thumbnail w-16 h-16 object-cover rounded cursor-pointer border-2 border-transparent"
-            />
-          </div>
-        </div>
-        <div class="product-details flex-grow">
-          <button
-            id="modal-close-btn"
-            class="close-btn absolute top-4 right-4 text-white text-2xl cursor-pointer hover:text-gray-300"
-          >
-            ×
-          </button>
-          <h2 id="product-name"></h2>
-          <p id="product-price" class="price"></p>
-          <div class="options mb-4">
-            <label class="block mb-1 text-gray-400 text-sm">Color:</label>
-            <select
-              id="product-color"
-              class="w-full p-2 rounded-lg border border-gray-700 bg-gray-800 text-white focus:outline-none focus:border-gray-500"
-            >
-              <option value="black">Black</option>
-              <option value="white">White</option>
-              <option value="gray">Gray</option>
-              <option value="blue">Blue</option>
-            </select>
-            <label class="block mb-1 text-gray-400 text-sm">Size:</label>
-            <select
-              id="product-size"
-              class="w-full p-2 rounded-lg border border-gray-700 bg-gray-800 text-white focus:outline-none focus:border-gray-500"
-            >
-              <option value="s">S</option>
-              <option value="m">M</option>
-              <option value="l">L</option>
-              <option value="xl">XL</option>
-            </select>
-            <div class="quantity-controls">
-              <button class="quantity-btn">-</button>
-              <span class="quantity-value">1</span>
-              <button class="quantity-btn">+</button>
-            </div>
-          </div>
-          <button
-            id="product-add-to-cart"
-            class="btn-anim add-to-cart w-full p-3 rounded-lg bg-gray-800 text-white border-none cursor-pointer transition-colors hover:bg-gray-700"
-          >
-            Add to Cart
-          </button>
-        </div>
-      </div>
-    </div>
 
     <footer class="bg-black py-8 border-t border-gray-600">
       <div class="container mx-auto px-4 text-center">
@@ -791,6 +451,6 @@
       </div>
     </footer>
 
-    <script src="script1.js" defer></script>
+    <script src="script.js"></script>
   </body>
 </html>
