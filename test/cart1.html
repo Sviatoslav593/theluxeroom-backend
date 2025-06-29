@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart - Black Boutique</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style1.css" />
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <header>
+      <nav
+        class="container mx-auto px-4 py-6 flex justify-between items-center"
+      >
+        <div class="logo">
+          <a href="./index1.html" class="text-white text-2xl font-bold"
+            >Black Boutique</a
+          >
+        </div>
+        <ul class="nav-links hidden md:flex space-x-8 items-center">
+          <li><a href="./index1.html" class="nav-link">Home</a></li>
+          <li class="group relative">
+            <a href="#" class="nav-link flex items-center">
+              For Men
+              <svg
+                class="w-4 h-4 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </a>
+            <ul
+              class="dropdown absolute left-0 mt-2 w-48 bg-black/85 backdrop-blur rounded-lg shadow-lg opacity-0 transform -translate-y-2 transition-all duration-300"
+            >
+              <li class="group relative">
+                <a
+                  href="#"
+                  class="nav-link block px-4 py-2 hover:bg-black/24 rounded-t-lg flex items-center"
+                >
+                  Clothing
+                  <svg
+                    class="w-4 h-4 ml-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    ></path>
+                  </svg>
+                </a>
+                <ul
+                  class="sub-dropdown absolute left-full top-0 w-48 bg-black/85 backdrop-blur rounded-lg shadow-lg opacity-0 transform -translate-y-2 transition-all duration-300"
+                >
+                  <li>
+                    <a
+                      href="mens-tshirts.html"
+                      class="nav-link block px-4 py-2 hover:bg-black/24 rounded-t-lg"
+                      >T-shirts</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="nav-link block px-4 py-2 hover:bg-black/24"
+                      >Pants</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="nav-link block px-4 py-2 hover:bg-black/24"
+                      >Shorts</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="nav-link block px-4 py-2 hover:bg-black/24"
+                      >Jackets</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="nav-link block px-4 py-2 hover:bg-black/24 rounded-b-lg"
+                      >Hoodies</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#" class="nav-link block px-4 py-2 hover:bg-black/24"
+                  >Footwear</a
+                >
+              </li>
+              <li>
+                <a href="#" class="nav-link block px-4 py-2 hover:bg-black/24"
+                  >Bags</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="nav-link block px-4 py-2 hover:bg-black/24 rounded-b-lg"
+                  >Accessories</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li class="group relative">
+            <a href="#" class="nav-link flex items-center">
+              For Women
+              <svg
+                class="w-4 h-4 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </a>
+            <ul
+              class="dropdown absolute left-0 mt-2 w-48 bg-black/85 backdrop-blur rounded-lg shadow-lg opacity-0 transform -translate-y-2 transition-all duration-300"
+            >
+              <li class="group relative">
+                <a
+                  href="#"
+                  class="nav-link block px-4 py-2 hover:bg-black/24 rounded-t-lg flex items-center"
+                >
+                  Clothing
+                  <svg
+                    class="w-4 h-4 ml-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    ></path>
+                  </svg>
+                </a>
+                <ul
+                  class="sub-dropdown absolute left-full top-0 w-48 bg-black/85 backdrop-blur rounded-lg shadow-lg opacity-0 transform -translate-y-2 transition-all duration-300"
+                >
+                  <li>
+                    <a
+                      href="#"
+                      class="nav-link block px-4 py-2 hover:bg-black/24 rounded-t-lg"
+                      >T-shirts</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="nav-link block px-4 py-2 hover:bg-black/24"
+                      >Pants</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="nav-link block px-4 py-2 hover:bg-black/24"
+                      >Shorts</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="nav-link block px-4 py-2 hover:bg-black/24"
+                      >Jackets</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="nav-link block px-4 py-2 hover:bg-black/24 rounded-b-lg"
+                      >Hoodies</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#" class="nav-link block px-4 py-2 hover:bg-black/24"
+                  >Footwear</a
+                >
+              </li>
+              <li>
+                <a href="#" class="nav-link block px-4 py-2 hover:bg-black/24"
+                  >Bags</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="nav-link block px-4 py-2 hover:bg-black/24 rounded-b-lg"
+                  >Accessories</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div class="icons flex items-center space-x-4 md:flex">
+          <a href="#" class="text-white md:hidden">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+              />
+            </svg>
+          </a>
+          <!-- CART BUTTON -->
+          <div class="icons">
+            <a href="cart.html" id="cart-icon"
+              ><svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                ></path>
+              </svg>
+              <span id="cart-count">0</span></a
+            >
+          </div>
+          <!-- CART BUTTON -->
+          <!-- <a
+            href="./cart1.html"
+            class="text-white"
+            id="mobile-cart-btn"
+            style="display: none"
+            ><svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+              ></path></svg
+          ></a> -->
+          <button
+            id="burger-open-btn"
+            class="md:hidden text-white focus:outline-none"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <div
+      id="mobile-menu"
+      class="fixed top-0 left-0 w-full h-screen bg-black bg-opacity-85 backdrop-blur-md z-50 hidden transform translate-x-full transition-transform duration-300"
+    >
+      <button id="close-btn" class="absolute top-4 right-4 text-white text-2xl">
+        ×
+      </button>
+      <div
+        class="mobile-menu-list flex flex-col justify-start items-start w-full h-full overflow-y-auto pt-24 px-4"
+      >
+        <a
+          href="./index1.html"
+          class="mobile-menu-link w-full py-2 text-lg border-b border-gray-700"
+          >Home</a
+        >
+
+        <button
+          id="mobile-men-toggle"
+          class="mobile-menu-link flex justify-between items-center w-full py-2 text-lg"
+        >
+          For Men
+          <svg width="24" height="24">
+            <path d="M7 10l5 5 5-5z" fill="white" />
+          </svg>
+        </button>
+        <div
+          class="submenu w-full max-h-0 overflow-hidden transition-all duration-400 opacity-0"
+          id="mobile-men-submenu"
+        >
+          <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
+            >Footwear</a
+          >
+          <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
+            >Bags</a
+          >
+          <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
+            >Accessories</a
+          >
+          <button
+            id="mobile-men-clothing-toggle"
+            class="mobile-menu-link flex justify-between items-center w-full py-2 text-lg pl-4"
+          >
+            Clothing
+            <svg width="24" height="24">
+              <path d="M7 10l5 5 5-5z" fill="white" />
+            </svg>
+          </button>
+          <div
+            class="submenu-sub w-full max-h-0 overflow-hidden transition-all duration-400 opacity-0"
+          >
+            <a
+              href="mens-tshirts.html"
+              class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              >T-shirts</a
+            >
+            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              >Pants</a
+            >
+            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              >Shorts</a
+            >
+            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              >Jackets</a
+            >
+            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              >Hoodies</a
+            >
+          </div>
+        </div>
+
+        <button
+          id="mobile-women-toggle"
+          class="mobile-menu-link flex justify-between items-center w-full py-2 text-lg"
+        >
+          For Women
+          <svg width="24" height="24">
+            <path d="M7 10l5 5 5-5z" fill="white" />
+          </svg>
+        </button>
+        <div
+          class="submenu w-full max-h-0 overflow-hidden transition-all duration-400 opacity-0"
+          id="mobile-women-submenu"
+        >
+          <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
+            >Footwear</a
+          >
+          <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
+            >Bags</a
+          >
+          <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
+            >Accessories</a
+          >
+          <button
+            id="mobile-women-clothing-toggle"
+            class="mobile-menu-link flex justify-between items-center w-full py-2 text-lg pl-4"
+          >
+            Clothing
+            <svg width="24" height="24">
+              <path d="M7 10l5 5 5-5z" fill="white" />
+            </svg>
+          </button>
+          <div
+            class="submenu-sub w-full max-h-0 overflow-hidden transition-all duration-400 opacity-0"
+          >
+            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              >T-shirts</a
+            >
+            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              >Pants</a
+            >
+            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              >Shorts</a
+            >
+            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              >Jackets</a
+            >
+            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              >Hoodies</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <section class="cart-section">
+        <h1 class="cart-title">Your Cart</h1>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-summary">
+          <p class="total">Total: $<span id="cart-total">0.00</span></p>
+          <button class="btn-anim checkout-btn">Proceed to Checkout</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-black py-8 border-t border-gray-600">
+      <div class="container mx-auto px-4 text-center">
+        <p class="text-gray-300 mb-4">
+          © 2025 Black Boutique. All rights reserved.
+        </p>
+        <div class="flex justify-center space-x-4">
+          <a href="#" class="text-gray-300 hover:text-white">Privacy Policy</a>
+          <a href="#" class="text-gray-300 hover:text-white"
+            >Terms of Service</a
+          >
+          <a href="#" class="text-gray-300 hover:text-white">Contact Us</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script1.js"></script>
+  </body>
+</html>
