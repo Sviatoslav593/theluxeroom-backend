@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cart - Black Boutique</title>
+    <title>Checkout - Black Boutique</title>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
@@ -14,7 +14,7 @@
     />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="flex flex-col min-h-screen">
+  <body class="flex flex-col min-h-screen font-poppins">
     <header>
       <nav
         class="container mx-auto px-4 py-6 flex justify-between items-center"
@@ -71,7 +71,7 @@
                 >
                   <li>
                     <a
-                      href="mens-tshirts.html"
+                      href="../mens-tshirts.html"
                       class="nav-link block px-4 py-2 hover:bg-black/24 rounded-t-lg"
                       >T-shirts</a
                     >
@@ -242,27 +242,23 @@
             </svg>
           </a>
           <!-- CART BUTTON -->
-          <div class="icons">
-            <a href="cart.html" id="cart-icon"
-              ><svg
-                class="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                ></path>
-              </svg>
-              <span id="cart-count">0</span></a
+          <a href="./cart.html" class="text-white" id="cart-btn"
+            ><svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-          </div>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+              ></path></svg
+          ></a>
           <!-- CART BUTTON -->
-          <!-- <a
-            href="./cart1.html"
+          <a
+            href="./cart.html"
             class="text-white"
             id="mobile-cart-btn"
             style="display: none"
@@ -278,7 +274,7 @@
                 stroke-width="2"
                 d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
               ></path></svg
-          ></a> -->
+          ></a>
           <button
             id="burger-open-btn"
             class="md:hidden text-white focus:outline-none"
@@ -303,87 +299,62 @@
 
     <div
       id="mobile-menu"
-      class="fixed top-0 left-0 w-full h-screen bg-black bg-opacity-85 backdrop-blur-md z-50 hidden transform translate-x-full transition-transform duration-300"
+      class="hidden fixed top-0 left-0 w-full h-screen bg-black/85 backdrop-blur-md z-50 transform translate-x-full transition-transform duration-300"
     >
-      <button id="close-btn" class="absolute top-4 right-4 text-white text-2xl">
-        ×
-      </button>
+      <button id="close-btn" class="absolute top-4 right-4 text-2xl">×</button>
       <div
-        class="mobile-menu-list flex flex-col justify-start items-start w-full h-full overflow-y-auto pt-24 px-4"
+        class="mobile-menu-list flex flex-col items-center justify-center h-full overflow-y-auto pt-16"
       >
         <a
-          href="./index.html"
-          class="mobile-menu-link w-full py-2 text-lg border-b border-gray-700"
-          >Home</a
-        >
-
-        <button
-          id="mobile-men-toggle"
-          class="mobile-menu-link flex justify-between items-center w-full py-2 text-lg"
-        >
-          For Men
-          <svg width="24" height="24">
-            <path d="M7 10l5 5 5-5z" fill="white" />
-          </svg>
-        </button>
+          href="index1.html"
+          class="mobile-menu-link text-xl hover:text-gray-300 flex justify-between w-full px-4 py-2"
+          id="mobile-home-toggle"
+          >Home <svg width="24" height="24"><path d="M7 10l5 5 5-5z" /></svg
+        ></a>
         <div
-          class="submenu w-full max-h-0 overflow-hidden transition-all duration-400 opacity-0"
-          id="mobile-men-submenu"
+          class="submenu w-full max-h-0 opacity-0 overflow-hidden transition-all duration-400"
         >
           <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
-            >Footwear</a
+            >Home</a
           >
-          <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
-            >Bags</a
-          >
-          <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
-            >Accessories</a
-          >
-          <button
-            id="mobile-men-clothing-toggle"
-            class="mobile-menu-link flex justify-between items-center w-full py-2 text-lg pl-4"
-          >
-            Clothing
-            <svg width="24" height="24">
-              <path d="M7 10l5 5 5-5z" fill="white" />
-            </svg>
-          </button>
-          <div
-            class="submenu-sub w-full max-h-0 overflow-hidden transition-all duration-400 opacity-0"
-          >
-            <a
-              href="mens-tshirts.html"
-              class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
-              >T-shirts</a
-            >
-            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
-              >Pants</a
-            >
-            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
-              >Shorts</a
-            >
-            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
-              >Jackets</a
-            >
-            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
-              >Hoodies</a
-            >
-          </div>
         </div>
-
-        <button
-          id="mobile-women-toggle"
-          class="mobile-menu-link flex justify-between items-center w-full py-2 text-lg"
-        >
-          For Women
-          <svg width="24" height="24">
-            <path d="M7 10l5 5 5-5z" fill="white" />
-          </svg>
-        </button>
+        <a
+          href="#"
+          class="mobile-menu-link text-xl hover:text-gray-300 flex justify-between w-full px-4 py-2"
+          id="mobile-men-toggle"
+          >For Men <svg width="24" height="24"><path d="M7 10l5 5 5-5z" /></svg
+        ></a>
         <div
-          class="submenu w-full max-h-0 overflow-hidden transition-all duration-400 opacity-0"
-          id="mobile-women-submenu"
+          class="submenu w-full max-h-0 opacity-0 overflow-hidden transition-all duration-400"
         >
+          <li class="sub-item">
+            <a
+              href="#"
+              class="mobile-menu-link text-lg hover:text-gray-300 flex justify-between w-full px-4 py-2"
+              id="mobile-men-clothing-toggle"
+              >Clothing
+              <svg width="24" height="24"><path d="M7 10l5 5 5-5z" /></svg
+            ></a>
+            <div
+              class="submenu-sub w-full max-h-0 opacity-0 overflow-hidden transition-all duration-400"
+            >
+              <a href="#" class="sub-sub-item block px-4 py-2 hover:bg-gray-800"
+                >T-shirts</a
+              >
+              <a href="#" class="sub-sub-item block px-4 py-2 hover:bg-gray-800"
+                >Pants</a
+              >
+              <a href="#" class="sub-sub-item block px-4 py-2 hover:bg-gray-800"
+                >Shorts</a
+              >
+              <a href="#" class="sub-sub-item block px-4 py-2 hover:bg-gray-800"
+                >Jackets</a
+              >
+              <a href="#" class="sub-sub-item block px-4 py-2 hover:bg-gray-800"
+                >Hoodies</a
+              >
+            </div>
+          </li>
           <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
             >Footwear</a
           >
@@ -393,47 +364,169 @@
           <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
             >Accessories</a
           >
-          <button
-            id="mobile-women-clothing-toggle"
-            class="mobile-menu-link flex justify-between items-center w-full py-2 text-lg pl-4"
+        </div>
+        <a
+          href="#"
+          class="mobile-menu-link text-xl hover:text-gray-300 flex justify-between w-full px-4 py-2"
+          id="mobile-women-toggle"
+          >For Women
+          <svg width="24" height="24"><path d="M7 10l5 5 5-5z" /></svg
+        ></a>
+        <div
+          class="submenu w-full max-h-0 opacity-0 overflow-hidden transition-all duration-400"
+        >
+          <li class="sub-item">
+            <a
+              href="#"
+              class="mobile-menu-link text-lg hover:text-gray-300 flex justify-between w-full px-4 py-2"
+              id="mobile-women-clothing-toggle"
+              >Clothing
+              <svg width="24" height="24"><path d="M7 10l5 5 5-5z" /></svg
+            ></a>
+            <div
+              class="submenu-sub w-full max-h-0 opacity-0 overflow-hidden transition-all duration-400"
+            >
+              <a href="#" class="sub-sub-item block px-4 py-2 hover:bg-gray-800"
+                >T-shirts</a
+              >
+              <a href="#" class="sub-sub-item block px-4 py-2 hover:bg-gray-800"
+                >Pants</a
+              >
+              <a href="#" class="sub-sub-item block px-4 py-2 hover:bg-gray-800"
+                >Shorts</a
+              >
+              <a href="#" class="sub-sub-item block px-4 py-2 hover:bg-gray-800"
+                >Jackets</a
+              >
+              <a href="#" class="sub-sub-item block px-4 py-2 hover:bg-gray-800"
+                >Hoodies</a
+              >
+            </div>
+          </li>
+          <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
+            >Footwear</a
           >
-            Clothing
-            <svg width="24" height="24">
-              <path d="M7 10l5 5 5-5z" fill="white" />
-            </svg>
-          </button>
-          <div
-            class="submenu-sub w-full max-h-0 overflow-hidden transition-all duration-400 opacity-0"
+          <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
+            >Bags</a
           >
-            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
-              >T-shirts</a
-            >
-            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
-              >Pants</a
-            >
-            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
-              >Shorts</a
-            >
-            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
-              >Jackets</a
-            >
-            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
-              >Hoodies</a
-            >
-          </div>
+          <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
+            >Accessories</a
+          >
         </div>
       </div>
     </div>
 
     <main>
-      <section class="cart-section">
-        <h1 class="cart-title">Your Cart</h1>
-        <div class="cart-items" id="cart-items"></div>
-        <div class="cart-summary">
-          <p class="total">Total: $<span id="cart-total">0.00</span></p>
-          <a href="./checkout.html" class="checkout-link btn-anim"
-            >Proceed to Checkout</a
+      <section class="checkout-section">
+        <div class="checkout-container flex flex-row gap-8 max-w-5xl mx-auto">
+          <div
+            class="checkout-form flex-1 bg-black/80 backdrop-blur-md p-6 rounded-lg border border-gray-700"
           >
+            <h2
+              class="checkout-title text-3xl font-bold mb-6 text-center text-gray-200"
+            >
+              Shipping Information
+            </h2>
+            <form id="shipping-form">
+              <div class="form-group mb-4">
+                <label for="first-name" class="block mb-2 text-gray-400"
+                  >First Name</label
+                >
+                <input
+                  type="text"
+                  id="first-name"
+                  name="first-name"
+                  class="w-full p-3 rounded-lg border border-gray-600 bg-gray-800 text-white text-base"
+                  required
+                />
+              </div>
+              <div class="form-group mb-4">
+                <label for="last-name" class="block mb-2 text-gray-400"
+                  >Last Name</label
+                >
+                <input
+                  type="text"
+                  id="last-name"
+                  name="last-name"
+                  class="w-full p-3 rounded-lg border border-gray-600 bg-gray-800 text-white text-base"
+                  required
+                />
+              </div>
+              <div class="form-group mb-4">
+                <label for="address" class="block mb-2 text-gray-400"
+                  >Delivery Address</label
+                >
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  class="w-full p-3 rounded-lg border border-gray-600 bg-gray-800 text-white text-base"
+                  required
+                />
+              </div>
+              <div class="form-group mb-4">
+                <label for="city" class="block mb-2 text-gray-400">City</label>
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  class="w-full p-3 rounded-lg border border-gray-600 bg-gray-800 text-white text-base"
+                  required
+                />
+              </div>
+              <div class="form-group mb-4">
+                <label for="phone" class="block mb-2 text-gray-400"
+                  >Phone Number</label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  class="w-full p-3 rounded-lg border border-gray-600 bg-gray-800 text-white text-base"
+                  required
+                />
+              </div>
+              <div class="form-group mb-4">
+                <label for="comments" class="block mb-2 text-gray-400"
+                  >Comments</label
+                >
+                <textarea
+                  id="comments"
+                  name="comments"
+                  rows="4"
+                  class="w-full p-3 rounded-lg border border-gray-600 bg-gray-800 text-white text-base resize-y"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div
+            class="checkout-summary flex-1 bg-black/80 backdrop-blur-md p-6 rounded-lg border border-gray-700"
+          >
+            <h2
+              class="checkout-title text-3xl font-bold mb-6 text-center text-gray-200"
+            >
+              Order Summary
+            </h2>
+            <div
+              class="order-items flex flex-col gap-4 mb-6"
+              id="order-items"
+            ></div>
+            <div class="delivery-info mb-6 text-gray-400">
+              <p>Delivery Time: 3-5 business days</p>
+              <p>Shipping Cost: $5.00 (Standard) / $10.00 (Express)</p>
+            </div>
+            <div class="order-total text-right">
+              <p class="text-xl mb-4">
+                Total: $<span id="order-total">0.00</span>
+              </p>
+              <button
+                class="btn-anim checkout-btn px-6 py-3 text-lg"
+                id="confirm-order"
+              >
+                Confirm Order
+              </button>
+            </div>
+          </div>
         </div>
       </section>
     </main>

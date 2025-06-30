@@ -1,4 +1,4 @@
-// Updated full script1.js with working mobile menu, submenus, modal thumbnails, quantity control, cart page, and fix for add-to-cart logic
+// Updated full script1.js with working mobile menu, submenus, modal thumbnails, quantity control, cart page, and checkout logic
 
 function debounce(func, wait) {
   let timeout;
@@ -145,22 +145,22 @@ function updateCart() {
       const cartItem = document.createElement("div");
       cartItem.className = "cart-item";
       cartItem.innerHTML = `
-          <img src="${item.image || "images/placeholder.jpg"}" alt="${
+        <img src="${item.image || "images/placeholder.jpg"}" alt="${
         item.name
       }" class="cart-item-image">
-          <div class="cart-item-details">
-            <h3>${item.name}</h3>
-            <p>Color: ${item.color ? item.color.toUpperCase() : "N/A"}</p>
-            <p>Size: ${item.size ? item.size.toUpperCase() : "N/A"}</p>
-            <p>Price: ${item.price}</p>
-            <div class="quantity-controls">
-              <button class="quantity-btn" data-index="${index}" data-action="decrease">-</button>
-              <span class="quantity-value">${item.quantity}</span>
-              <button class="quantity-btn" data-index="${index}" data-action="increase">+</button>
-            </div>
-            <button class="remove-btn" data-index="${index}">Remove</button>
+        <div class="cart-item-details">
+          <h3>${item.name}</h3>
+          <p>Color: ${item.color ? item.color.toUpperCase() : "N/A"}</p>
+          <p>Size: ${item.size ? item.size.toUpperCase() : "N/A"}</p>
+          <p>Price: ${item.price}</p>
+          <div class="quantity-controls">
+            <button class="quantity-btn" data-index="${index}" data-action="decrease">-</button>
+            <span class="quantity-value">${item.quantity}</span>
+            <button class="quantity-btn" data-index="${index}" data-action="increase">+</button>
           </div>
-        `;
+          <button class="remove-btn" data-index="${index}">Remove</button>
+        </div>
+      `;
       cartItems.appendChild(cartItem);
     });
 
@@ -170,6 +170,42 @@ function updateCart() {
         (sum, item) => sum + item.quantity,
         0
       );
+  }
+}
+
+function updateOrderSummary() {
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  const orderItems = document.getElementById("order-items");
+  const orderTotal = document.getElementById("order-total");
+
+  if (orderItems) {
+    orderItems.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      const price = parseFloat(item.price.replace("$", ""));
+      const itemTotal = price * item.quantity;
+      total += itemTotal;
+
+      const orderItem = document.createElement("div");
+      orderItem.className = "order-item";
+      orderItem.innerHTML = `
+        <img src="${item.image || "images/placeholder.jpg"}" alt="${
+        item.name
+      }" class="order-item-image">
+        <div class="order-item-details">
+          <h3>${item.name}</h3>
+          <p>Color: ${item.color ? item.color.toUpperCase() : "N/A"}</p>
+          <p>Size: ${item.size ? item.size.toUpperCase() : "N/A"}</p>
+          <p>Price: ${item.price} x ${item.quantity} = $${itemTotal.toFixed(
+        2
+      )}</p>
+        </div>
+      `;
+      orderItems.appendChild(orderItem);
+    });
+
+    if (orderTotal) orderTotal.textContent = total.toFixed(2);
   }
 }
 
@@ -363,9 +399,27 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("product-modal").classList.remove("active");
     });
 
+  // Partial update for cart checkout logic with link
   // Логіка для сторінки кошика
   if (document.getElementById("cart-items")) {
     updateCart();
+
+    // Функція для оновлення стану посилання
+    function updateCheckoutLink() {
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      const checkoutLink = document.querySelector(".checkout-link"); // Оновлено для роботи з <a>
+      if (checkoutLink) {
+        if (cart.length === 0) {
+          checkoutLink.removeAttribute("href"); // Видаляємо href, якщо кошик порожній
+          checkoutLink.classList.add("opacity-50", "cursor-not-allowed");
+          checkoutLink.classList.remove("hover:text-gray-300");
+        } else {
+          checkoutLink.setAttribute("href", "checkout.html"); // Додаємо href, якщо кошик не порожній
+          checkoutLink.classList.remove("opacity-50", "cursor-not-allowed");
+          checkoutLink.classList.add("hover:text-gray-300");
+        }
+      }
+    }
 
     document.addEventListener("click", (e) => {
       if (e.target.classList.contains("quantity-btn")) {
@@ -379,6 +433,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cart[index].quantity++;
           localStorage.setItem("cart", JSON.stringify(cart));
           updateCart();
+          updateCheckoutLink(); // Оновлюємо стан посилання після зміни кількості
         }
       } else if (e.target.classList.contains("remove-btn")) {
         const index = e.target.getAttribute("data-index");
@@ -387,12 +442,22 @@ document.addEventListener("DOMContentLoaded", () => {
           cart.splice(index, 1);
           localStorage.setItem("cart", JSON.stringify(cart));
           updateCart();
+          updateCheckoutLink(); // Оновлюємо стан посилання після видалення
         }
       }
     });
 
-    document.querySelector(".checkout-btn")?.addEventListener("click", () => {
-      alert("Перехід до оформлення замовлення!");
+    // Ініціалізація стану посилання при завантаженні
+    updateCheckoutLink();
+  }
+
+  // Логіка для сторінки оформлення замовлення
+  if (document.getElementById("order-items")) {
+    updateOrderSummary();
+
+    document.getElementById("confirm-order")?.addEventListener("click", () => {
+      alert("Перехід до сторінки підтвердження замовлення!");
+      // Тут можна додати редирект на сторінку підтвердження, наприклад: window.location.href = "confirmation.html";
     });
   }
 });
