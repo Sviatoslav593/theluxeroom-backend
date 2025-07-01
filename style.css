@@ -489,6 +489,17 @@ header .icons button {
   line-height: 1.2;
 }
 
+#language-select {
+  color: #ffffff;
+  background: #1e1e1e;
+  cursor: pointer;
+}
+
+#language-select:hover {
+  background: #ffffff;
+  color: #1e1e1e;
+}
+
 /* Checkout Adaptive Styles for Mobile (max-width: 639px) */
 @media (max-width: 639px) {
   .order-item {

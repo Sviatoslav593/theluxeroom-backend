@@ -1,18 +1,19 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Black Boutique</title>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link href="style.css" rel="stylesheet" />
   </head>
   <body class="flex flex-col min-h-screen">
     <header>
@@ -20,26 +21,34 @@
         class="container mx-auto px-4 py-6 flex justify-between items-center"
       >
         <div class="logo">
-          <a href="./index.html" class="text-white text-2xl font-bold"
+          <a class="text-white text-2xl font-bold" href="./index.html"
             >Black Boutique</a
           >
         </div>
         <ul class="nav-links hidden md:flex space-x-8 items-center">
-          <li><a href="./index.html" class="nav-link">Home</a></li>
+          <li>
+            <a class="nav-link" data-translate="homeLink" href="./index.html"
+              >Home</a
+            >
+          </li>
           <li class="group relative">
-            <a href="#" class="nav-link flex items-center">
+            <a
+              class="nav-link flex items-center"
+              data-translate="forMenLink"
+              href="#"
+            >
               For Men
               <svg
                 class="w-4 h-4 ml-2"
                 fill="none"
                 stroke="currentColor"
-                viewBox="0 0 24 24"
+                viewbox="0 0 24 24"
               >
                 <path
+                  d="M19 9l-7 7-7-7"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M19 9l-7 7-7-7"
                 ></path>
               </svg>
             </a>
@@ -48,21 +57,22 @@
             >
               <li class="group relative">
                 <a
-                  href="#"
                   class="nav-link block px-4 py-2 hover:bg-black/24 rounded-t-lg flex items-center"
+                  data-translate="clothingLink"
+                  href="#"
                 >
                   Clothing
                   <svg
                     class="w-4 h-4 ml-2"
                     fill="none"
                     stroke="currentColor"
-                    viewBox="0 0 24 24"
+                    viewbox="0 0 24 24"
                   >
                     <path
+                      d="M9 5l7 7-7 7"
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
-                      d="M9 5l7 7-7 7"
                     ></path>
                   </svg>
                 </a>
@@ -71,74 +81,90 @@
                 >
                   <li>
                     <a
-                      href="../mens-tshirts.html"
                       class="nav-link block px-4 py-2 hover:bg-black/24 rounded-t-lg"
+                      data-translate="tshirtsLink"
+                      href="../mens-tshirts.html"
                       >T-shirts</a
                     >
                   </li>
                   <li>
                     <a
-                      href="#"
                       class="nav-link block px-4 py-2 hover:bg-black/24"
+                      data-translate="pantsLink"
+                      href="./mens-pants.html"
                       >Pants</a
                     >
                   </li>
                   <li>
                     <a
-                      href="#"
                       class="nav-link block px-4 py-2 hover:bg-black/24"
+                      data-translate="shortsLink"
+                      href="./mens-shorts.html"
                       >Shorts</a
                     >
                   </li>
                   <li>
                     <a
-                      href="#"
                       class="nav-link block px-4 py-2 hover:bg-black/24"
+                      data-translate="jacketsLink"
+                      href="./mens-jackets.html"
                       >Jackets</a
                     >
                   </li>
                   <li>
                     <a
-                      href="#"
                       class="nav-link block px-4 py-2 hover:bg-black/24 rounded-b-lg"
+                      data-translate="hoodiesLink"
+                      href="mens-hoodies.html"
                       >Hoodies</a
                     >
                   </li>
                 </ul>
               </li>
               <li>
-                <a href="#" class="nav-link block px-4 py-2 hover:bg-black/24"
+                <a
+                  class="nav-link block px-4 py-2 hover:bg-black/24"
+                  data-translate="footwearLink"
+                  href="mens-footwear.html"
                   >Footwear</a
                 >
               </li>
               <li>
-                <a href="#" class="nav-link block px-4 py-2 hover:bg-black/24"
+                <a
+                  class="nav-link block px-4 py-2 hover:bg-black/24"
+                  data-translate="bagsLink"
+                  href="mens-bags.html"
                   >Bags</a
                 >
               </li>
               <li>
                 <a
-                  href="#"
                   class="nav-link block px-4 py-2 hover:bg-black/24 rounded-b-lg"
+                  data-translate="accessoriesLink"
+                  href="mens-accessories.html"
                   >Accessories</a
                 >
               </li>
             </ul>
           </li>
           <li class="group relative">
-            <a href="#" class="nav-link flex items-center">
+            <a
+              class="nav-link flex items-center"
+              data-translate="forWomenLink"
+              href="#"
+            >
               For Women
               <svg
                 class="w-4 h-4 ml-2"
                 fill="none"
                 stroke="currentColor"
-                viewBox="0 0 24 24"
+                viewbox="0 0 24 24"
               >
                 <path
+                  d="M19 9l-7 7-7-7"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M19 9l-7 7-7-7"
                 ></path>
               </svg>
             </a>
@@ -147,21 +173,22 @@
             >
               <li class="group relative">
                 <a
-                  href="#"
                   class="nav-link block px-4 py-2 hover:bg-black/24 rounded-t-lg flex items-center"
+                  data-translate="clothingLink"
+                  href="#"
                 >
                   Clothing
                   <svg
                     class="w-4 h-4 ml-2"
                     fill="none"
                     stroke="currentColor"
-                    viewBox="0 0 24 24"
+                    viewbox="0 0 24 24"
                   >
                     <path
+                      d="M9 5l7 7-7 7"
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
-                      d="M9 5l7 7-7 7"
                     ></path>
                   </svg>
                 </a>
@@ -170,55 +197,67 @@
                 >
                   <li>
                     <a
-                      href="#"
                       class="nav-link block px-4 py-2 hover:bg-black/24 rounded-t-lg"
+                      data-translate="tshirtsLink"
+                      href="womens-tshirts.html"
                       >T-shirts</a
                     >
                   </li>
                   <li>
                     <a
-                      href="#"
                       class="nav-link block px-4 py-2 hover:bg-black/24"
+                      data-translate="pantsLink"
+                      href="womens-pants.html"
                       >Pants</a
                     >
                   </li>
                   <li>
                     <a
-                      href="#"
                       class="nav-link block px-4 py-2 hover:bg-black/24"
+                      data-translate="shortsLink"
+                      href="womens-shorts.html"
                       >Shorts</a
                     >
                   </li>
                   <li>
                     <a
-                      href="#"
                       class="nav-link block px-4 py-2 hover:bg-black/24"
+                      data-translate="jacketsLink"
+                      href="womens-jackets.html"
                       >Jackets</a
                     >
                   </li>
                   <li>
                     <a
-                      href="#"
                       class="nav-link block px-4 py-2 hover:bg-black/24 rounded-b-lg"
+                      data-translate="hoodiesLink"
+                      href="womens-hoodies.html"
                       >Hoodies</a
                     >
                   </li>
                 </ul>
               </li>
               <li>
-                <a href="#" class="nav-link block px-4 py-2 hover:bg-black/24"
+                <a
+                  class="nav-link block px-4 py-2 hover:bg-black/24"
+                  data-translate="footwearLink"
+                  href="womens-footwear.html"
                   >Footwear</a
                 >
               </li>
               <li>
-                <a href="#" class="nav-link block px-4 py-2 hover:bg-black/24"
+                <a
+                  class="nav-link block px-4 py-2 hover:bg-black/24"
+                  data-translate="bagsLink"
+                  href="womens-bags.html"
                   >Bags</a
                 >
               </li>
               <li>
                 <a
-                  href="#"
                   class="nav-link block px-4 py-2 hover:bg-black/24 rounded-b-lg"
+                  data-translate="accessoriesLink"
+                  href="womens-accessories.html"
                   >Accessories</a
                 >
               </li>
@@ -226,223 +265,292 @@
           </li>
         </ul>
         <div class="icons flex items-center space-x-4 md:flex">
-          <a href="#" class="text-white md:hidden">
+          <select
+            class="bg-black/80 backdrop-blur-md border border-gray-700 rounded-lg text-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-500 hover:bg-gray-800 transition-all duration-200"
+            id="language-select"
+          >
+            <option value="bg">БГ</option>
+            <option value="en">EN</option>
+            <option value="ru">RU</option>
+            <option value="de">DE</option>
+          </select>
+          <a class="text-white md:hidden" href="#">
             <svg
               class="w-6 h-6"
               fill="none"
               stroke="currentColor"
-              viewBox="0 0 24 24"
+              viewbox="0 0 24 24"
             >
               <path
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-              />
+              ></path>
             </svg>
           </a>
           <!-- CART BUTTON -->
-          <a href="./cart.html" class="text-white" id="cart-btn"
+          <a class="text-white" href="./cart.html" id="cart-btn"
             ><svg
               class="w-6 h-6"
               fill="none"
               stroke="currentColor"
-              viewBox="0 0 24 24"
+              viewbox="0 0 24 24"
             >
               <path
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
               ></path></svg
           ></a>
           <!-- CART BUTTON -->
           <a
-            href="./cart.html"
             class="text-white"
+            href="./cart.html"
             id="mobile-cart-btn"
             style="display: none"
             ><svg
               class="w-6 h-6"
               fill="none"
               stroke="currentColor"
-              viewBox="0 0 24 24"
+              viewbox="0 0 24 24"
             >
               <path
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
               ></path></svg
           ></a>
           <button
-            id="burger-open-btn"
             class="md:hidden text-white focus:outline-none"
+            id="burger-open-btn"
           >
             <svg
               class="w-6 h-6"
               fill="none"
               stroke="currentColor"
-              viewBox="0 0 24 24"
+              viewbox="0 0 24 24"
             >
               <path
+                d="M4 6h16M4 12h16m-7 6h7"
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M4 6h16M4 12h16m-7 6h7"
               ></path>
             </svg>
           </button>
         </div>
       </nav>
     </header>
-
     <div
-      id="mobile-menu"
       class="fixed top-0 left-0 w-full h-screen bg-black bg-opacity-85 backdrop-blur-md z-50 hidden transform translate-x-full transition-transform duration-300"
+      id="mobile-menu"
     >
-      <button id="close-btn" class="absolute top-4 right-4 text-white text-2xl">
+      <button class="absolute top-4 right-4 text-white text-2xl" id="close-btn">
         ×
       </button>
       <div
         class="mobile-menu-list flex flex-col justify-start items-start w-full h-full overflow-y-auto pt-24 px-4"
       >
         <a
-          href="#"
           class="mobile-menu-link w-full py-2 text-lg border-b border-gray-700"
+          data-translate="homeLink"
+          href="#"
           >Home</a
         >
-
         <button
-          id="mobile-men-toggle"
           class="mobile-menu-link flex justify-between items-center w-full py-2 text-lg"
+          data-translate="forMenLink"
+          id="mobile-men-toggle"
         >
           For Men
-          <svg width="24" height="24">
-            <path d="M7 10l5 5 5-5z" fill="white" />
+          <svg height="24" width="24">
+            <path d="M7 10l5 5 5-5z" fill="white"></path>
           </svg>
         </button>
         <div
           class="submenu w-full max-h-0 overflow-hidden transition-all duration-400 opacity-0"
           id="mobile-men-submenu"
         >
-          <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
+          <a
+            class="sub-item block px-4 py-2 hover:bg-gray-800"
+            data-translate="footwearLink"
+            href="#"
             >Footwear</a
           >
-          <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
+          <a
+            class="sub-item block px-4 py-2 hover:bg-gray-800"
+            data-translate="bagsLink"
+            href="#"
             >Bags</a
           >
-          <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
+          <a
+            class="sub-item block px-4 py-2 hover:bg-gray-800"
+            data-translate="accessoriesLink"
+            href="#"
             >Accessories</a
           >
           <button
-            id="mobile-men-clothing-toggle"
             class="mobile-menu-link flex justify-between items-center w-full py-2 text-lg pl-4"
+            data-translate="clothingLink"
+            id="mobile-men-clothing-toggle"
           >
             Clothing
-            <svg width="24" height="24">
-              <path d="M7 10l5 5 5-5z" fill="white" />
+            <svg height="24" width="24">
+              <path d="M7 10l5 5 5-5z" fill="white"></path>
             </svg>
           </button>
           <div
             class="submenu-sub w-full max-h-0 overflow-hidden transition-all duration-400 opacity-0"
           >
             <a
-              href="mens-tshirts.html"
               class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              data-translate="tshirtsLink"
+              href="mens-tshirts.html"
               >T-shirts</a
             >
-            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+            <a
+              class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              data-translate="pantsLink"
+              href="#"
               >Pants</a
             >
-            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+            <a
+              class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              data-translate="shortsLink"
+              href="#"
               >Shorts</a
             >
-            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+            <a
+              class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              data-translate="jacketsLink"
+              href="#"
               >Jackets</a
             >
-            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+            <a
+              class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              data-translate="hoodiesLink"
+              href="#"
               >Hoodies</a
             >
           </div>
         </div>
-
         <button
-          id="mobile-women-toggle"
           class="mobile-menu-link flex justify-between items-center w-full py-2 text-lg"
+          data-translate="forWomenLink"
+          id="mobile-women-toggle"
         >
           For Women
-          <svg width="24" height="24">
-            <path d="M7 10l5 5 5-5z" fill="white" />
+          <svg height="24" width="24">
+            <path d="M7 10l5 5 5-5z" fill="white"></path>
           </svg>
         </button>
         <div
           class="submenu w-full max-h-0 overflow-hidden transition-all duration-400 opacity-0"
           id="mobile-women-submenu"
         >
-          <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
+          <a
+            class="sub-item block px-4 py-2 hover:bg-gray-800"
+            data-translate="footwearLink"
+            href="#"
             >Footwear</a
           >
-          <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
+          <a
+            class="sub-item block px-4 py-2 hover:bg-gray-800"
+            data-translate="bagsLink"
+            href="#"
             >Bags</a
           >
-          <a href="#" class="sub-item block px-4 py-2 hover:bg-gray-800"
+          <a
+            class="sub-item block px-4 py-2 hover:bg-gray-800"
+            data-translate="accessoriesLink"
+            href="#"
             >Accessories</a
           >
           <button
-            id="mobile-women-clothing-toggle"
             class="mobile-menu-link flex justify-between items-center w-full py-2 text-lg pl-4"
+            data-translate="clothingLink"
+            id="mobile-women-clothing-toggle"
           >
             Clothing
-            <svg width="24" height="24">
-              <path d="M7 10l5 5 5-5z" fill="white" />
+            <svg height="24" width="24">
+              <path d="M7 10l5 5 5-5z" fill="white"></path>
             </svg>
           </button>
           <div
             class="submenu-sub w-full max-h-0 overflow-hidden transition-all duration-400 opacity-0"
           >
-            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+            <a
+              class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              data-translate="tshirtsLink"
+              href="#"
               >T-shirts</a
             >
-            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+            <a
+              class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              data-translate="pantsLink"
+              href="#"
               >Pants</a
             >
-            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+            <a
+              class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              data-translate="shortsLink"
+              href="#"
               >Shorts</a
             >
-            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+            <a
+              class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              data-translate="jacketsLink"
+              href="#"
               >Jackets</a
             >
-            <a href="#" class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+            <a
+              class="sub-sub-item block px-6 py-2 hover:bg-gray-800"
+              data-translate="hoodiesLink"
+              href="#"
               >Hoodies</a
             >
           </div>
         </div>
       </div>
     </div>
-
     <main class="flex-grow pt-0 mt-16">
       <section
         class="hero-bg h-96 flex items-center justify-center text-center"
       >
         <div class="bg-black/85 p-8 rounded-lg">
-          <h1 class="text-4xl md:text-6xl font-bold mb-4">
+          <h1
+            class="text-4xl md:text-6xl font-bold mb-4"
+            data-translate="heroTitle"
+          >
             Elevate Your Style
           </h1>
-          <p class="text-lg md:text-xl mb-6">
+          <p class="text-lg md:text-xl mb-6" data-translate="heroSubtitle">
             Discover premium fashion at Black Boutique
           </p>
-          <a href="#" class="btn-anim shop-now text-black">Shop Now</a>
+          <a
+            class="btn-anim shop-now text-black"
+            data-translate="shopNow"
+            href="#"
+            >Shop Now</a
+          >
         </div>
       </section>
-
       <section class="container mx-auto px-4 py-12 bg-gray-950">
-        <h2 class="text-3xl font-bold text-center mb-8">Products</h2>
+        <h2
+          class="text-3xl font-bold text-center mb-8"
+          data-translate="productsTitle"
+        >
+          Products
+        </h2>
         <div class="flex justify-between items-center mb-6">
           <div></div>
           <button
-            id="filter-btn"
             class="bg-black/85 text-white font-semibold py-2 px-4 rounded-lg hover:bg-black/95 transition-all duration-300"
+            data-translate="filterBtn"
+            id="filter-btn"
           >
             ⚙️ Filters
           </button>
@@ -450,14 +558,14 @@
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-6" id="product-grid">
           <div
             class="product-card"
-            data-product-id="1"
             data-color="black"
+            data-product-id="1"
             data-size="s"
           >
             <img
-              src="./vuitton.webp"
               alt="Amiri T-Shirt"
               class="product-img w-full h-48 object-cover rounded-t-lg"
+              src="./vuitton.webp"
             />
             <div class="product-content p-4">
               <h3>Balenciaga T-Shirt</h3>
@@ -467,31 +575,32 @@
               >
                 <button
                   class="add-to-cart bg-black text-white px-4 py-2 w-full rounded shadow-md transition-colors hover:bg-gray-700"
+                  data-translate="viewDetails"
                 >
                   View Details
                 </button>
               </div>
             </div>
             <div class="thumbnails-container">
-              <img src="./vuitton.webp" alt="Thumbnail 1" class="thumbnail" />
+              <img alt="Thumbnail 1" class="thumbnail" src="./vuitton.webp" />
               <img
-                src="./balenciaga2.jpeg"
                 alt="Thumbnail 2"
                 class="thumbnail"
+                src="./balenciaga2.jpeg"
               />
-              <img src="./vuitton.webp" alt="Thumbnail 3" class="thumbnail" />
+              <img alt="Thumbnail 3" class="thumbnail" src="./vuitton.webp" />
             </div>
           </div>
           <div
             class="product-card"
-            data-product-id="2"
             data-color="black"
+            data-product-id="2"
             data-size="m"
           >
             <img
-              src="./balenciaga2.jpeg"
               alt="Amiri T-Shirt"
               class="product-img w-full h-48 object-cover rounded-t-lg"
+              src="./balenciaga2.jpeg"
             />
             <div class="product-content p-4">
               <h3>Amiri T-Shirt</h3>
@@ -501,31 +610,32 @@
               >
                 <button
                   class="add-to-cart bg-black text-white px-4 py-2 w-full rounded shadow-md transition-colors hover:bg-gray-700"
+                  data-translate="viewDetails"
                 >
                   View Details
                 </button>
               </div>
             </div>
             <div class="thumbnails-container hidden">
-              <img src="./vuitton.webp" alt="Thumbnail 1" class="thumbnail" />
+              <img alt="Thumbnail 1" class="thumbnail" src="./vuitton.webp" />
               <img
-                src="./balenciaga2.jpeg"
                 alt="Thumbnail 2"
                 class="thumbnail"
+                src="./balenciaga2.jpeg"
               />
-              <img src="./vuitton.webp" alt="Thumbnail 3" class="thumbnail" />
+              <img alt="Thumbnail 3" class="thumbnail" src="./vuitton.webp" />
             </div>
           </div>
           <div
             class="product-card"
-            data-product-id="3"
             data-color="grey"
+            data-product-id="3"
             data-size="l"
           >
             <img
-              src="./vuitton.webp"
               alt="Amiri T-Shirt"
               class="product-img w-full h-48 object-cover rounded-t-lg"
+              src="./vuitton.webp"
             />
             <div class="product-content p-4">
               <h3>Amiri T-Shirt</h3>
@@ -535,31 +645,32 @@
               >
                 <button
                   class="add-to-cart bg-black text-white px-4 py-2 w-full rounded shadow-md transition-colors hover:bg-gray-700"
+                  data-translate="viewDetails"
                 >
                   View Details
                 </button>
               </div>
             </div>
             <div class="thumbnails-container">
-              <img src="./vuitton.webp" alt="Thumbnail 1" class="thumbnail" />
+              <img alt="Thumbnail 1" class="thumbnail" src="./vuitton.webp" />
               <img
-                src="./balenciaga2.jpeg"
                 alt="Thumbnail 2"
                 class="thumbnail"
+                src="./balenciaga2.jpeg"
               />
-              <img src="./vuitton.webp" alt="Thumbnail 3" class="thumbnail" />
+              <img alt="Thumbnail 3" class="thumbnail" src="./vuitton.webp" />
             </div>
           </div>
           <div
             class="product-card"
-            data-product-id="4"
             data-color="blue"
+            data-product-id="4"
             data-size="xl"
           >
             <img
-              src="./vuitton.webp"
               alt="Amiri T-Shirt"
               class="product-img w-full h-48 object-cover rounded-t-lg"
+              src="./vuitton.webp"
             />
             <div class="product-content p-4">
               <h3>Amiri T-Shirt</h3>
@@ -569,127 +680,128 @@
               >
                 <button
                   class="add-to-cart bg-black text-white px-4 py-2 w-full rounded shadow-md transition-colors hover:bg-gray-700"
+                  data-translate="viewDetails"
                 >
                   View Details
                 </button>
               </div>
             </div>
             <div class="thumbnails-container">
-              <img src="./vuitton.webp" alt="Thumbnail 1" class="thumbnail" />
+              <img alt="Thumbnail 1" class="thumbnail" src="./vuitton.webp" />
               <img
-                src="./balenciaga2.jpeg"
                 alt="Thumbnail 2"
                 class="thumbnail"
+                src="./balenciaga2.jpeg"
               />
-              <img src="./vuitton.webp" alt="Thumbnail 3" class="thumbnail" />
+              <img alt="Thumbnail 3" class="thumbnail" src="./vuitton.webp" />
             </div>
           </div>
         </div>
       </section>
     </main>
-
     <div
-      id="filter-modal"
       class="fixed inset-0 bg-black bg-opacity-85 backdrop-blur-md z-40 hidden items-center justify-center opacity-0 transition-opacity duration-500 ease-in-out"
+      id="filter-modal"
     >
       <button
-        id="filter-close-btn"
         class="absolute top-4 right-4 text-white text-2xl hover:text-gray-300 transition-colors"
+        id="filter-close-btn"
       >
         ×
       </button>
       <div
         class="modal-content bg-gray-900 p-6 rounded-xl shadow-lg max-w-4xl max-h-[85vh] overflow-y-auto border border-gray-700"
       >
-        <h2>Filters & Sort</h2>
+        <h2 data-translate="filterModalTitle">Filters &amp; Sort</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="filter-section">
-            <h3>Color</h3>
+            <h3 data-translate="filterColorTitle">Color</h3>
             <div class="filter-group space-y-3">
               <label class="flex items-center"
                 ><input
+                  class="w-5 h-5 mr-3 border-gray-500 rounded"
                   type="checkbox"
                   value="color-black"
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
                 />
                 Black</label
               >
               <label class="flex items-center"
                 ><input
+                  class="w-5 h-5 mr-3 border-gray-500 rounded"
                   type="checkbox"
                   value="color-grey"
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
                 />
                 Grey</label
               >
               <label class="flex items-center"
                 ><input
+                  class="w-5 h-5 mr-3 border-gray-500 rounded"
                   type="checkbox"
                   value="color-white"
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
                 />
                 White</label
               >
               <label class="flex items-center"
                 ><input
+                  class="w-5 h-5 mr-3 border-gray-500 rounded"
                   type="checkbox"
                   value="color-blue"
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
                 />
                 Blue</label
               >
             </div>
           </div>
           <div class="filter-section">
-            <h3>Size</h3>
+            <h3 data-translate="filterSizeTitle">Size</h3>
             <div class="filter-group space-y-3">
               <label class="flex items-center"
                 ><input
+                  class="w-5 h-5 mr-3 border-gray-500 rounded"
                   type="checkbox"
                   value="size-s"
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
                 />
                 S</label
               >
               <label class="flex items-center"
                 ><input
+                  class="w-5 h-5 mr-3 border-gray-500 rounded"
                   type="checkbox"
                   value="size-m"
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
                 />
                 M</label
               >
               <label class="flex items-center"
                 ><input
+                  class="w-5 h-5 mr-3 border-gray-500 rounded"
                   type="checkbox"
                   value="size-l"
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
                 />
                 L</label
               >
               <label class="flex items-center"
                 ><input
+                  class="w-5 h-5 mr-3 border-gray-500 rounded"
                   type="checkbox"
                   value="size-xl"
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
                 />
                 XL</label
               >
             </div>
           </div>
           <div class="sort-section">
-            <h3>Sort By</h3>
+            <h3 data-translate="sortByTitle">Sort By</h3>
             <select
-              id="sort-select"
               class="w-full p-3 rounded-lg border border-gray-600 bg-gray-800 text-gray-200 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              id="sort-select"
             >
               <option value="newest">Newest First</option>
               <option value="price-asc">Price: Low to High</option>
               <option value="price-desc">Price: High to Low</option>
             </select>
             <button
-              id="filter-apply-btn"
               class="w-full py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors duration-300"
+              data-translate="applyBtn"
+              id="filter-apply-btn"
             >
               Apply
             </button>
@@ -699,51 +811,51 @@
     </div>
     <!-- Product Modal -->
     <div
-      id="product-modal"
       class="fixed inset-0 bg-black bg-opacity-85 backdrop-blur-md z-50 hidden items-center justify-center opacity-0 transition-opacity duration-500 ease-in-out"
+      id="product-modal"
     >
       <div
         class="modal-content bg-gray-900 border border-gray-700 rounded-xl p-6 max-w-4xl max-h-[90vh] overflow-y-auto relative shadow-lg flex flex-col md:flex-row"
       >
         <div class="product-images flex-shrink-0 mb-4 md:mb-0 md:mr-6">
           <img
-            id="main-image"
-            src="./vuitton.webp"
             alt="Product Image"
             class="main-image w-full max-w-xs h-auto rounded-lg"
+            id="main-image"
+            src="./vuitton.webp"
           />
           <div class="thumbnail-images flex gap-2 mt-2">
             <img
-              src="./balenciaga2.jpeg"
               alt="Thumbnail 1"
               class="thumbnail w-16 h-16 object-cover rounded cursor-pointer border-2 border-transparent"
+              src="./balenciaga2.jpeg"
             />
             <img
-              src="./vuitton.webp"
               alt="Thumbnail 2"
               class="thumbnail w-16 h-16 object-cover rounded cursor-pointer border-2 border-transparent"
+              src="./vuitton.webp"
             />
             <img
-              src="./balenciaga2.jpeg"
               alt="Thumbnail 3"
               class="thumbnail w-16 h-16 object-cover rounded cursor-pointer border-2 border-transparent"
+              src="./balenciaga2.jpeg"
             />
           </div>
         </div>
         <div class="product-details flex-grow">
           <button
-            id="modal-close-btn"
             class="close-btn absolute top-4 right-4 text-white text-2xl cursor-pointer hover:text-gray-300"
+            id="modal-close-btn"
           >
             ×
           </button>
           <h2 id="product-name"></h2>
-          <p id="product-price" class="price"></p>
+          <p class="price" id="product-price"></p>
           <div class="options mb-4">
             <label class="block mb-1 text-gray-400 text-sm">Color:</label>
             <select
-              id="product-color"
               class="w-full p-2 rounded-lg border border-gray-700 bg-gray-800 text-white focus:outline-none focus:border-gray-500"
+              id="product-color"
             >
               <option value="black">Black</option>
               <option value="white">White</option>
@@ -752,8 +864,8 @@
             </select>
             <label class="block mb-1 text-gray-400 text-sm">Size:</label>
             <select
-              id="product-size"
               class="w-full p-2 rounded-lg border border-gray-700 bg-gray-800 text-white focus:outline-none focus:border-gray-500"
+              id="product-size"
             >
               <option value="s">S</option>
               <option value="m">M</option>
@@ -767,30 +879,42 @@
             </div>
           </div>
           <button
-            id="product-add-to-cart"
             class="btn-anim add-to-cart p-3 w-full rounded-lg bg-gray-800 text-white border-none cursor-pointer transition-colors hover:bg-gray-700"
+            data-translate="addToCart"
+            id="product-add-to-cart"
           >
             Add to Cart
           </button>
         </div>
       </div>
     </div>
-
     <footer class="bg-black py-8 border-t border-gray-600">
       <div class="container mx-auto px-4 text-center">
-        <p class="text-gray-300 mb-4">
+        <p class="text-gray-300 mb-4" data-translate="footerText">
           © 2025 Black Boutique. All rights reserved.
         </p>
         <div class="flex justify-center space-x-4">
-          <a href="#" class="text-gray-300 hover:text-white">Privacy Policy</a>
-          <a href="#" class="text-gray-300 hover:text-white"
+          <a
+            class="text-gray-300 hover:text-white"
+            data-translate="privacyPolicy"
+            href="#"
+            >Privacy Policy</a
+          >
+          <a
+            class="text-gray-300 hover:text-white"
+            data-translate="termsOfService"
+            href="#"
             >Terms of Service</a
           >
-          <a href="#" class="text-gray-300 hover:text-white">Contact Us</a>
+          <a
+            class="text-gray-300 hover:text-white"
+            data-translate="contactUs"
+            href="#"
+            >Contact Us</a
+          >
         </div>
       </div>
     </footer>
-
-    <script src="script.js" defer></script>
+    <script defer="" src="script.js"></script>
   </body>
 </html>
