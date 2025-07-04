@@ -353,28 +353,22 @@ document.addEventListener("DOMContentLoaded", () => {
       const productName = document
         .getElementById("product-name")
         .textContent.trim();
-      const productPrice = document
-        .getElementById("product-price")
-        .textContent.trim();
       const productColor = document.getElementById("product-color").value;
       const productSize = document.getElementById("product-size").value;
       const mainImageSrc = document.getElementById("main-image").src;
 
-      if (!productName || !productPrice) {
-        console.error("Invalid product data:", { productName, productPrice });
+      if (!productName) {
+        console.error("Invalid product data:", { productName });
         return;
       }
 
       let cart = JSON.parse(localStorage.getItem("cart") || "[]");
-      const existingItem = cart.find(
-        (item) => item.name === productName && item.price === productPrice
-      );
+      const existingItem = cart.find((item) => item.name === productName);
       if (existingItem) {
         existingItem.quantity = quantity;
       } else {
         cart.push({
           name: productName,
-          price: productPrice,
           color: productColor,
           size: productSize,
           quantity,
@@ -394,12 +388,17 @@ document.addEventListener("DOMContentLoaded", () => {
       notification.className = "notification";
       notification.textContent = "Product added to cart!";
       document.body.appendChild(notification);
-      setTimeout(() => notification.remove(), 2000);
+
+      // Видаляємо клас no-scroll після завершення анімації
+      setTimeout(() => {
+        notification.remove();
+        document.body.classList.remove("no-scroll");
+      }, 2000);
 
       document.getElementById("product-modal").classList.remove("active");
     });
 
-  // Partial update for cart checkout logic with link
+  // Partial update for cart checkout logic with link (price-independent)
   // Логіка для сторінки кошика
   if (document.getElementById("cart-items")) {
     updateCart();
@@ -451,14 +450,90 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCheckoutLink();
   }
 
+  // Оновлена функція updateCart без залежності від ціни
+  function updateCart() {
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    const cartCount = document.getElementById("cart-count");
+
+    if (cartItems) {
+      cartItems.innerHTML = "";
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        const itemTotal = item.quantity * 0;
+        total += itemTotal;
+
+        const cartItem = document.createElement("div");
+        cartItem.className = "cart-item";
+        cartItem.innerHTML = `
+          <img src="${item.image || "images/placeholder.jpg"}" alt="${
+          item.name
+        }" class="cart-item-image">
+          <div class="cart-item-details">
+            <h3>${item.name}</h3>
+            <p>Color: ${item.color ? item.color.toUpperCase() : "N/A"}</p>
+            <p>Size: ${item.size ? item.size.toUpperCase() : "N/A"}</p>
+            <div class="quantity-controls">
+              <button class="quantity-btn" data-index="${index}" data-action="decrease">-</button>
+              <span class="quantity-value">${item.quantity}</span>
+              <button class="quantity-btn" data-index="${index}" data-action="increase">+</button>
+            </div>
+            <button class="remove-btn" data-index="${index}">Remove</button>
+          </div>
+        `;
+        cartItems.appendChild(cartItem);
+      });
+
+      if (cartTotal) cartTotal.textContent = total.toFixed(2);
+      if (cartCount)
+        cartCount.textContent = cart.reduce(
+          (sum, item) => sum + item.quantity,
+          0
+        );
+    }
+  }
+
   // Логіка для сторінки оформлення замовлення
   if (document.getElementById("order-items")) {
     updateOrderSummary();
 
     document.getElementById("confirm-order")?.addEventListener("click", () => {
-      alert("Перехід до сторінки підтвердження замовлення!");
       // Тут можна додати редирект на сторінку підтвердження, наприклад: window.location.href = "confirmation.html";
+      window.location.href = "confirmation.html"; // Прямий перехід без alert
     });
+  }
+
+  // Оновлена функція updateOrderSummary без залежності від ціни
+  function updateOrderSummary() {
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const orderItems = document.getElementById("order-items");
+    const orderTotal = document.getElementById("order-total");
+
+    if (orderItems) {
+      orderItems.innerHTML = "";
+      let total = 0; // Тимчасово 0, оскільки ціни немає
+
+      cart.forEach((item, index) => {
+        const orderItem = document.createElement("div");
+        orderItem.className = "order-item";
+        orderItem.innerHTML = `
+        <img src="${item.image || "images/placeholder.jpg"}" alt="${
+          item.name
+        }" class="order-item-image">
+        <div class="order-item-details">
+          <h3>${item.name}</h3>
+          <p>Color: ${item.color ? item.color.toUpperCase() : "N/A"}</p>
+          <p>Size: ${item.size ? item.size.toUpperCase() : "N/A"}</p>
+          <p>Quantity: ${item.quantity}</p>
+        </div>
+      `;
+        orderItems.appendChild(orderItem);
+      });
+
+      if (orderTotal) orderTotal.textContent = total.toFixed(2); // Загальна сума поки що 0
+    }
   }
 });
 
@@ -467,7 +542,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Об'єкт перекладів
 const translations = {
   bg: {
-    pageTitle: "Black Boutique",
+    pageTitle: "TheLuxeRoom",
     homeLink: "Начало",
     forMenLink: "За Мъже",
     forWomenLink: "За Жени",
@@ -496,8 +571,8 @@ const translations = {
     applyBtn: "Приложи",
     colorLabel: "Цвят:",
     sizeLabel: "Размер:",
-    viewDetails: "Виж Детайли",
-    addToCart: "Добави в Количка",
+    viewDetails: "Заявка за Артикул",
+    addToCart: "Заявка за Артикул",
     cartTitle: "Количка",
     proceedToCheckout: "Напред към Касата",
     footerText: "© 2025 Black Boutique. Всички права запазени.",
@@ -511,13 +586,13 @@ const translations = {
     cityLabel: "Град",
     phoneLabel: "Телефонен Номер",
     commentsLabel: "Коментари",
-    orderSummaryTitle: "Обобщение на Поръчката",
-    deliveryTime: "Време за Доставка: 3-5 работни дни",
+    orderSummaryTitle: "Обобщение на запитването",
+    deliveryTime: "Време за Доставка > след потвърждение",
     shippingCost: "Стойност на Доставка: $5.00 (Стандартен) / $10.00 (Експрес)",
     confirmOrder: "Потвърди Поръчката",
   },
   en: {
-    pageTitle: "Black Boutique",
+    pageTitle: "TheLuxeRoom",
     homeLink: "Home",
     forMenLink: "For Men",
     forWomenLink: "For Women",
@@ -546,8 +621,8 @@ const translations = {
     applyBtn: "Apply",
     colorLabel: "Color:",
     sizeLabel: "Size:",
-    viewDetails: "View Details",
-    addToCart: "Add to Cart",
+    viewDetails: "Request Item",
+    addToCart: "Request Item",
     cartTitle: "Cart",
     proceedToCheckout: "Proceed to Checkout",
     footerText: "© 2025 Black Boutique. All rights reserved.",
@@ -561,13 +636,13 @@ const translations = {
     cityLabel: "City",
     phoneLabel: "Phone Number",
     commentsLabel: "Comments",
-    orderSummaryTitle: "Order Summary",
-    deliveryTime: "Delivery Time: 3-5 business days",
+    orderSummaryTitle: "Request Summary",
+    deliveryTime: "Delivery Time: Upon Confirmation",
     shippingCost: "Shipping Cost: $5.00 (Standard) / $10.00 (Express)",
     confirmOrder: "Confirm Order",
   },
   ru: {
-    pageTitle: "Black Boutique",
+    pageTitle: "TheLuxeRoom",
     homeLink: "Главная",
     forMenLink: "Для Мужчин",
     forWomenLink: "Для Женщин",
@@ -596,8 +671,8 @@ const translations = {
     applyBtn: "Применить",
     colorLabel: "Цвет:",
     sizeLabel: "Размер:",
-    viewDetails: "Посмотреть детали",
-    addToCart: "Добавить в Корзину",
+    viewDetails: "Запросить товар",
+    addToCart: "Запросить товар",
     cartTitle: "Корзина",
     proceedToCheckout: "Перейти к Оплате",
     footerText: "© 2025 Black Boutique. Все права защищены.",
@@ -611,13 +686,13 @@ const translations = {
     cityLabel: "Город",
     phoneLabel: "Номер Телефона",
     commentsLabel: "Комментарии",
-    orderSummaryTitle: "Сводка Заказа",
-    deliveryTime: "Время Доставки: 3-5 рабочих дней",
+    orderSummaryTitle: "Сводка Запроса",
+    deliveryTime: "Время Доставки > После Подтверждения",
     shippingCost: "Стоимость Доставки: $5.00 (Стандарт) / $10.00 (Экспресс)",
     confirmOrder: "Подтвердить Заказ",
   },
   de: {
-    pageTitle: "Black Boutique",
+    pageTitle: "TheLuxeRoom",
     homeLink: "Startseite",
     forMenLink: "Für Herren",
     forWomenLink: "Für Damen",
@@ -646,8 +721,8 @@ const translations = {
     applyBtn: "Anwenden",
     colorLabel: "Farbe:",
     sizeLabel: "Größe:",
-    viewDetails: "Details anzeigen",
-    addToCart: "In den Warenkorb",
+    viewDetails: "Anfrage für einen Artikel",
+    addToCart: "Anfrage für einen Artikel",
     cartTitle: "Warenkorb",
     proceedToCheckout: "Zur Kasse gehen",
     footerText: "© 2025 Black Boutique. Alle Rechte vorbehalten.",
@@ -661,8 +736,8 @@ const translations = {
     cityLabel: "Stadt",
     phoneLabel: "Telefonnummer",
     commentsLabel: "Kommentare",
-    orderSummaryTitle: "Bestellübersicht",
-    deliveryTime: "Lieferzeit: 3-5 Werktage",
+    orderSummaryTitle: "Zusammenfassung des Antrags",
+    deliveryTime: "Lieferfrist > nach Bestätigung",
     shippingCost: "Versandkosten: $5.00 (Standard) / $10.00 (Express)",
     confirmOrder: "Bestellung bestätigen",
   },
