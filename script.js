@@ -275,11 +275,10 @@ document.addEventListener("DOMContentLoaded", () => {
         ".thumbnails-container .thumbnail"
       );
 
-      // Відновлюємо головне фото з коректними розмірами
       const mainImage = document.getElementById("main-image");
       mainImage.src = imgSrc;
       mainImage.style.maxWidth = "100%";
-      mainImage.style.height = "300px"; // Повертаємо коректну висоту
+      mainImage.style.height = "300px";
 
       cardThumbs.forEach((thumb, i) => {
         if (thumbnails[i])
