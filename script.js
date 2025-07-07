@@ -1,5 +1,3 @@
-// Updated full script1.js with working mobile menu, submenus, modal thumbnails, quantity control, cart page, and checkout logic
-
 function debounce(func, wait) {
   let timeout;
   return function executedFunction(...args) {
@@ -766,4 +764,39 @@ document.addEventListener("DOMContentLoaded", () => {
   const select = document.getElementById("language-select");
   if (select) select.value = lang;
   translatePage();
+});
+
+// --- Brands dropdown interaction ---
+
+document.querySelectorAll(".group.relative").forEach((item) => {
+  item.addEventListener("mouseenter", () => {
+    const brand = item.querySelector(".brands-dropdown");
+    if (brand) {
+      brand.classList.add("visible");
+    }
+  });
+  item.addEventListener("mouseleave", () => {
+    const brand = item.querySelector(".brands-dropdown");
+    if (brand) {
+      brand.classList.remove("visible");
+    }
+  });
+});
+
+// Розгортання брендів у мобільному меню
+document.querySelectorAll(".brand-toggle").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const submenu = btn.nextElementSibling;
+    const isOpen = submenu.classList.contains("open");
+
+    if (isOpen) {
+      submenu.classList.remove("open");
+      submenu.style.maxHeight = null;
+      submenu.style.opacity = "0";
+    } else {
+      submenu.classList.add("open");
+      submenu.style.maxHeight = submenu.scrollHeight + "px";
+      submenu.style.opacity = "1";
+    }
+  });
 });

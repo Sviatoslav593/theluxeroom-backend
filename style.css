@@ -666,6 +666,7 @@ header .icons button {
   -webkit-overflow-scrolling: touch;
   display: flex;
   flex-direction: column;
+  align-items: center !important;
   z-index: 1;
 }
 
@@ -2155,4 +2156,100 @@ header .icons button {
     font-size: 1rem;
     width: 100%;
   }
+}
+
+/* Refined Brands Dropdown and Submenu Toggle */
+
+/* Final Logic: Hide clothing submenu & brand dropdowns by default */
+
+/* Hide clothing submenu by default */
+.sub-dropdown {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+/* Show when parent li is hovered */
+.group:hover > .sub-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Hide brands dropdown by default */
+.sub-dropdown li {
+  position: relative;
+}
+
+.sub-dropdown li .brands-dropdown {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  margin-left: 0.25rem;
+  width: 12rem;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  z-index: 80;
+}
+
+.sub-dropdown li:hover > .brands-dropdown {
+  display: block;
+}
+
+/* === Brands Dropdown Logic === */
+
+/* Ховаємо всі брендові списки за замовчуванням */
+.brands-dropdown {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  margin-left: 0.25rem;
+  width: 12rem;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  z-index: 90;
+}
+
+/* Показуємо брендовий список при наведенні на категорію */
+.group.relative:hover > .brands-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.brands-dropdown li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #ffffff;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.brands-dropdown li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.brand-submenu {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.brand-submenu.open {
+  opacity: 1;
 }
