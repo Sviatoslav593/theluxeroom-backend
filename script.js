@@ -497,8 +497,16 @@ document.addEventListener("DOMContentLoaded", () => {
     updateOrderSummary();
 
     document.getElementById("confirm-order")?.addEventListener("click", () => {
-      // Тут можна додати редирект на сторінку підтвердження, наприклад: window.location.href = "confirmation.html";
-      window.location.href = "confirmation.html"; // Прямий перехід без alert
+      const notification = document.createElement("div");
+      notification.className = "notification";
+      notification.textContent = "Order successfully placed!";
+      document.body.appendChild(notification);
+      setTimeout(() => {
+        notification.remove();
+        // Очищення кошика після сповіщення
+        localStorage.removeItem("cart");
+        updateOrderSummary(); // Оновлюємо відображення, щоб показати порожній кошик
+      }, 2000);
     });
   }
 
@@ -506,11 +514,9 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateOrderSummary() {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     const orderItems = document.getElementById("order-items");
-    const orderTotal = document.getElementById("order-total");
 
     if (orderItems) {
       orderItems.innerHTML = "";
-      let total = 0; // Тимчасово 0, оскільки ціни немає
 
       cart.forEach((item, index) => {
         const orderItem = document.createElement("div");
@@ -528,8 +534,6 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
         orderItems.appendChild(orderItem);
       });
-
-      if (orderTotal) orderTotal.textContent = total.toFixed(2); // Загальна сума поки що 0
     }
   }
 });
