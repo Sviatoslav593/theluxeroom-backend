@@ -818,7 +818,7 @@ header .icons button {
   background: rgba(0, 0, 0, 0.85);
   border-radius: 0.75rem;
   padding: 1.5rem;
-  max-width: 85%;
+  max-width: 40%;
   max-height: 80vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -828,7 +828,8 @@ header .icons button {
   transition: all 0.5s ease-in-out;
   display: flex;
   flex-direction: row;
-  margin-top: 10vh;
+  gap: 1.5rem;
+  margin-top: 5vh;
 }
 
 #product-modal .close-btn {
@@ -871,6 +872,10 @@ header .icons button {
   margin-top: 0;
   justify-content: center;
   transition: all 0.5s ease-in-out;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.5rem;
+  white-space: nowrap;
 }
 
 #product-modal .thumbnail {

@@ -1134,16 +1134,6 @@
         >
           Products
         </h2>
-        <div class="flex justify-between items-center mb-6">
-          <div></div>
-          <button
-            class="bg-black/85 text-white font-semibold py-2 px-4 rounded-lg hover:bg-black/95 transition-all duration-300"
-            data-translate="filterBtn"
-            id="filter-btn"
-          >
-            ⚙️ Filters
-          </button>
-        </div>
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-6" id="product-grid">
           <div
             class="product-card"
@@ -1186,84 +1176,37 @@
                 class="thumbnail"
                 src="./images/for-women-bags/chan3ll/1/a1733439273246_8837.jpg"
               />
+              <img
+                alt="Thumbnail 4"
+                class="thumbnail"
+                src="./images/for-women-bags/chan3ll/1/a1733439273131_6657.jpg"
+              />
+              <img
+                alt="Thumbnail 5"
+                class="thumbnail"
+                src="./images/for-women-bags/chan3ll/1/a1733439273278_5514.jpg"
+              />
+              <img
+                alt="Thumbnail 6"
+                class="thumbnail"
+                src="./images/for-women-bags/chan3ll/1/a1733439273295_3784.jpg"
+              />
+              <img
+                alt="Thumbnail 7"
+                class="thumbnail"
+                src="./images/for-women-bags/chan3ll/1/a1733439274618_8008.jpg"
+              />
+              <img
+                alt="Thumbnail 8"
+                class="thumbnail"
+                src="./images/for-women-bags/chan3ll/1/a1733439274624_4160.jpg"
+              />
             </div>
           </div>
         </div>
       </section>
     </main>
-    <div
-      class="fixed inset-0 bg-black bg-opacity-85 backdrop-blur-md z-40 hidden items-center justify-center opacity-0 transition-opacity duration-500 ease-in-out"
-      id="filter-modal"
-    >
-      <button
-        class="absolute top-4 right-4 text-white text-2xl hover:text-gray-300 transition-colors"
-        id="filter-close-btn"
-      >
-        ×
-      </button>
-      <div
-        class="modal-content bg-gray-900 p-6 rounded-xl shadow-lg max-w-4xl max-h-[85vh] overflow-y-auto border border-gray-700"
-      >
-        <h2 data-translate="filterModalTitle">Filters &amp; Sort</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="filter-section">
-            <h3 data-translate="filterSizeTitle">Size</h3>
-            <div class="filter-group space-y-3">
-              <label class="flex items-center"
-                ><input
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
-                  type="checkbox"
-                  value="size-s"
-                />
-                S</label
-              >
-              <label class="flex items-center"
-                ><input
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
-                  type="checkbox"
-                  value="size-m"
-                />
-                M</label
-              >
-              <label class="flex items-center"
-                ><input
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
-                  type="checkbox"
-                  value="size-l"
-                />
-                L</label
-              >
-              <label class="flex items-center"
-                ><input
-                  class="w-5 h-5 mr-3 border-gray-500 rounded"
-                  type="checkbox"
-                  value="size-xl"
-                />
-                XL</label
-              >
-            </div>
-          </div>
-          <div class="sort-section">
-            <h3 data-translate="sortByTitle">Sort By</h3>
-            <select
-              class="w-full p-3 rounded-lg border border-gray-600 bg-gray-800 text-gray-200 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              id="sort-select"
-            >
-              <option value="newest">Newest First</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-            </select>
-            <button
-              class="w-full py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors duration-300"
-              data-translate="applyBtn"
-              id="filter-apply-btn"
-            >
-              Apply
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+
     <!-- Product Modal -->
     <div
       class="fixed inset-0 bg-black bg-opacity-85 backdrop-blur-md z-50 hidden items-center justify-center opacity-0 transition-opacity duration-500 ease-in-out"
@@ -1307,26 +1250,6 @@
           <h2 id="product-name"></h2>
           <p class="price" id="product-price"></p>
           <div class="options mb-4">
-            <label class="block mb-1 text-gray-400 text-sm">Color:</label>
-            <select
-              class="w-full p-2 rounded-lg border border-gray-700 bg-gray-800 text-white focus:outline-none focus:border-gray-500"
-              id="product-color"
-            >
-              <option value="black">Black</option>
-              <option value="white">White</option>
-              <option value="gray">Gray</option>
-              <option value="blue">Blue</option>
-            </select>
-            <label class="block mb-1 text-gray-400 text-sm">Size:</label>
-            <select
-              class="w-full p-2 rounded-lg border border-gray-700 bg-gray-800 text-white focus:outline-none focus:border-gray-500"
-              id="product-size"
-            >
-              <option value="s">S</option>
-              <option value="m">M</option>
-              <option value="l">L</option>
-              <option value="xl">XL</option>
-            </select>
             <div class="quantity-controls">
               <button class="quantity-btn">-</button>
               <span class="quantity-value">1</span>

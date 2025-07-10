@@ -1117,7 +1117,7 @@
             >
               Shipping Information
             </h2>
-            <form id="shipping-form">
+            <form id="shipping-form" action="/submit" method="POST">
               <div class="form-group mb-4">
                 <label
                   for="first-name"
@@ -1207,6 +1207,13 @@
                   class="w-full p-3 rounded-lg border border-gray-600 bg-gray-800 text-white text-base resize-y"
                 ></textarea>
               </div>
+              <button
+                class="btn-anim checkout-btn px-6 py-3 text-lg"
+                id="confirm-order"
+                data-translate="confirmOrder"
+              >
+                Confirm Order
+              </button>
             </form>
           </div>
 
@@ -1233,13 +1240,6 @@
             </div>
             <div class="order-total text-right">
               <p class="text-xl mb-4">Total: Upon confirmation</p>
-              <button
-                class="btn-anim checkout-btn px-6 py-3 text-lg"
-                id="confirm-order"
-                data-translate="confirmOrder"
-              >
-                Confirm Order
-              </button>
             </div>
           </div>
         </div>

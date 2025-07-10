@@ -263,11 +263,11 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     });
 
+  // Логіка для модалки товару з динамічною кількістю thumbnail і делегуванням подій
   document.querySelectorAll(".add-to-cart").forEach((button) => {
     button.addEventListener("click", function () {
       const card = this.closest(".product-card");
       const name = card.querySelector("h3").textContent;
-      const price = card.querySelector("p").textContent;
       const imgSrc = card.querySelector(".product-img").src;
 
       const thumbnails = document.querySelectorAll("#product-modal .thumbnail");
@@ -275,18 +275,23 @@ document.addEventListener("DOMContentLoaded", () => {
         ".thumbnails-container .thumbnail"
       );
 
+      // Відновлюємо головне фото з коректними розмірами
       const mainImage = document.getElementById("main-image");
       mainImage.src = imgSrc;
       mainImage.style.maxWidth = "100%";
       mainImage.style.height = "300px";
 
+      // Очищаємо існуючі thumbnails і додаємо лише ті, що є
+      const thumbnailContainer = document.querySelector(".thumbnail-images");
+      thumbnails.forEach((thumb) => thumb.remove());
       cardThumbs.forEach((thumb, i) => {
-        if (thumbnails[i])
-          thumbnails[i].src = thumb.src || "images/placeholder.jpg";
-      });
-
-      thumbnails.forEach((thumb, i) => {
-        thumb.classList.toggle("active", i === 0);
+        const newThumb = document.createElement("img");
+        newThumb.src = thumb.src || "images/placeholder.jpg";
+        newThumb.alt = `Thumbnail ${i + 1}`;
+        newThumb.className =
+          "thumbnail w-15 h-15 object-cover rounded-md cursor-pointer border-2 border-transparent hover:border-gray-500";
+        newThumb.classList.toggle("active", i === 0);
+        thumbnailContainer.appendChild(newThumb);
       });
 
       document.getElementById("product-modal").classList.add("active");
@@ -294,21 +299,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Оновлюємо дані в модалці
       document.getElementById("product-name").textContent = name;
-      document.getElementById("product-price").textContent = price;
     });
   });
 
-  document.querySelectorAll("#product-modal .thumbnail").forEach((thumb) => {
-    thumb.addEventListener("click", function () {
-      const mainImage = document.getElementById("main-image");
-      const current = document.querySelector(
-        "#product-modal .thumbnail.active"
-      );
-      if (current) current.classList.remove("active");
-      this.classList.add("active");
-      mainImage.src = this.src;
+  // Делегування подій для переключення thumbnail
+  document
+    .querySelector(".thumbnail-images")
+    ?.addEventListener("click", (e) => {
+      const thumb = e.target.closest(".thumbnail");
+      if (thumb) {
+        const mainImage = document.getElementById("main-image");
+        const current = document.querySelector(
+          "#product-modal .thumbnail.active"
+        );
+        if (current) current.classList.remove("active");
+        thumb.classList.add("active");
+        mainImage.src = thumb.src;
+      }
     });
-  });
 
   document.getElementById("modal-close-btn")?.addEventListener("click", () => {
     document.getElementById("product-modal").classList.remove("active");
@@ -350,8 +358,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const productName = document
         .getElementById("product-name")
         .textContent.trim();
-      const productColor = document.getElementById("product-color").value;
-      const productSize = document.getElementById("product-size").value;
+      const productColor = document.getElementById("product-color")
+        ? document.getElementById("product-color").value
+        : null;
+      const productSize = document.getElementById("product-size")
+        ? document.getElementById("product-size").value
+        : null;
       const mainImageSrc = document.getElementById("main-image").src;
 
       if (!productName) {
@@ -403,14 +415,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // Функція для оновлення стану посилання
     function updateCheckoutLink() {
       const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-      const checkoutLink = document.querySelector(".checkout-link"); // Оновлено для роботи з <a>
+      const checkoutLink = document.querySelector(".checkout-link");
       if (checkoutLink) {
         if (cart.length === 0) {
-          checkoutLink.removeAttribute("href"); // Видаляємо href, якщо кошик порожній
+          checkoutLink.removeAttribute("href");
           checkoutLink.classList.add("opacity-50", "cursor-not-allowed");
           checkoutLink.classList.remove("hover:text-gray-300");
         } else {
-          checkoutLink.setAttribute("href", "checkout.html"); // Додаємо href, якщо кошик не порожній
+          checkoutLink.setAttribute("href", "checkout.html");
           checkoutLink.classList.remove("opacity-50", "cursor-not-allowed");
           checkoutLink.classList.add("hover:text-gray-300");
         }
@@ -429,7 +441,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cart[index].quantity++;
           localStorage.setItem("cart", JSON.stringify(cart));
           updateCart();
-          updateCheckoutLink(); // Оновлюємо стан посилання після зміни кількості
+          updateCheckoutLink();
         }
       } else if (e.target.classList.contains("remove-btn")) {
         const index = e.target.getAttribute("data-index");
@@ -438,7 +450,7 @@ document.addEventListener("DOMContentLoaded", () => {
           cart.splice(index, 1);
           localStorage.setItem("cart", JSON.stringify(cart));
           updateCart();
-          updateCheckoutLink(); // Оновлюємо стан посилання після видалення
+          updateCheckoutLink();
         }
       }
     });
@@ -447,31 +459,37 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCheckoutLink();
   }
 
-  // Оновлена функція updateCart без залежності від ціни
+  // Оновлена функція updateCart без відображення N/A для відсутніх кольору та розміру
   function updateCart() {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     const cartItems = document.getElementById("cart-items");
-    const cartTotal = document.getElementById("cart-total");
     const cartCount = document.getElementById("cart-count");
 
     if (cartItems) {
       cartItems.innerHTML = "";
-      let total = 0;
+      let total = 0; // Тимчасово 0, оскільки ціни немає
 
       cart.forEach((item, index) => {
-        const itemTotal = item.quantity * 0;
-        total += itemTotal;
-
         const cartItem = document.createElement("div");
         cartItem.className = "cart-item";
-        cartItem.innerHTML = `
+        let itemDetailsHTML = `
           <img src="${item.image || "images/placeholder.jpg"}" alt="${
           item.name
         }" class="cart-item-image">
           <div class="cart-item-details">
             <h3>${item.name}</h3>
-            <p>Color: ${item.color ? item.color.toUpperCase() : "N/A"}</p>
-            <p>Size: ${item.size ? item.size.toUpperCase() : "N/A"}</p>
+        `;
+
+        // Додаємо колір лише якщо він існує
+        if (item.color) {
+          itemDetailsHTML += `<p>Color: ${item.color.toUpperCase()}</p>`;
+        }
+        // Додаємо розмір лише якщо він існує
+        if (item.size) {
+          itemDetailsHTML += `<p>Size: ${item.size.toUpperCase()}</p>`;
+        }
+
+        itemDetailsHTML += `
             <div class="quantity-controls">
               <button class="quantity-btn" data-index="${index}" data-action="decrease">-</button>
               <span class="quantity-value">${item.quantity}</span>
@@ -480,10 +498,10 @@ document.addEventListener("DOMContentLoaded", () => {
             <button class="remove-btn" data-index="${index}">Remove</button>
           </div>
         `;
+        cartItem.innerHTML = itemDetailsHTML;
         cartItems.appendChild(cartItem);
       });
 
-      if (cartTotal) cartTotal.textContent = total.toFixed(2);
       if (cartCount)
         cartCount.textContent = cart.reduce(
           (sum, item) => sum + item.quantity,
