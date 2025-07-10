@@ -2258,3 +2258,13 @@ header .icons button {
 .brand-submenu.open {
   opacity: 1;
 }
+@media (max-width: 639px) {
+  .logo-text {
+    font-size: 18px !important;
+  }
+
+  .logo-img {
+    max-width: 30px !important;
+    max-height: 30px !important;
+  }
+}
