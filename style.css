@@ -431,7 +431,7 @@ header .icons button {
 }
 
 .checkout-section {
-  padding-top: 100px; /* Збільшено для уникнення перекриття хедером (враховуючи padding і shadow) */
+  padding-top: 150px;
 }
 
 .checkout-form {
