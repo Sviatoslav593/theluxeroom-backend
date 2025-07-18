@@ -29,8 +29,8 @@ app.post("/orders", async (req, res) => {
     city,
     phone,
     comments,
-    items, // Кошик як масив об'єктів з frontend
-    total = 0, // Загальна сума (якщо додасте ціни, розрахуйте на frontend)
+    items,
+    total = 0,
   } = req.body;
 
   try {
@@ -56,6 +56,7 @@ app.post("/orders", async (req, res) => {
 });
 
 // Запуск сервера
-app.listen(3000, () => {
-  console.log("🌐 Сервер запущено на http://localhost:3000");
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Сервер запущено на порту ${port}`);
 });
