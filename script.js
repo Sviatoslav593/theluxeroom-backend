@@ -514,18 +514,76 @@ document.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById("order-items")) {
     updateOrderSummary();
 
-    document.getElementById("confirm-order")?.addEventListener("click", () => {
-      const notification = document.createElement("div");
-      notification.className = "notification";
-      notification.textContent = "Order successfully placed!";
-      document.body.appendChild(notification);
-      setTimeout(() => {
-        notification.remove();
-        // Очищення кошика після сповіщення
-        localStorage.removeItem("cart");
-        updateOrderSummary(); // Оновлюємо відображення, щоб показати порожній кошик
-      }, 2000);
-    });
+    document
+      .getElementById("confirm-order")
+      ?.addEventListener("click", async () => {
+        const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+        console.log("Кошик перед надсиланням:", cart); // Лог для перевірки кошика
+        if (cart.length === 0) {
+          alert("Ваш кошик порожній!");
+          return;
+        }
+
+        const firstName = document.getElementById("first-name")?.value.trim();
+        const lastName = document.getElementById("last-name")?.value.trim();
+        const address = document.getElementById("address")?.value.trim();
+        const city = document.getElementById("city")?.value.trim();
+        const phone = document.getElementById("phone")?.value.trim();
+        const comments = document.getElementById("comments")?.value.trim();
+
+        console.log("Дані форми:", {
+          firstName,
+          lastName,
+          address,
+          city,
+          phone,
+          comments,
+        }); // Лог для перевірки форми
+
+        if (!firstName || !lastName || !address || !city || !phone) {
+          alert("Будь ласка, заповніть всі обов'язкові поля!");
+          return;
+        }
+
+        let total = 0; // Якщо є ціни, розрахуйте тут
+
+        try {
+          const response = await fetch("http://localhost:3000/orders", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              firstName,
+              lastName,
+              address,
+              city,
+              phone,
+              comments,
+              items: cart,
+              total,
+            }),
+          });
+
+          const responseText = await response.text();
+          console.log("Відповідь від сервера:", responseText); // Лог для перевірки відповіді
+
+          if (response.ok) {
+            const notification = document.createElement("div");
+            notification.className = "notification";
+            notification.textContent = "Order successfully placed!";
+            document.body.appendChild(notification);
+            setTimeout(() => {
+              notification.remove();
+              localStorage.removeItem("cart");
+              updateOrderSummary();
+            }, 2000);
+          } else {
+            alert("Order processing error: " + responseText);
+          }
+        } catch (err) {
+          console.error("Network error:", err);
+          alert("Network error! The server is not responding.");
+        }
+      });
   }
 
   // Оновлена функція updateOrderSummary без залежності від ціни
@@ -554,6 +612,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   }
+  // loadProducts();
 });
 
 // Updated Translation Logic for Multiple Pages
@@ -821,3 +880,82 @@ document.querySelectorAll(".brand-toggle").forEach((btn) => {
     }
   });
 });
+
+// Функція для завантаження та рендерингу продуктів з БД
+async function loadProducts() {
+  const productGrid = document.getElementById("product-grid");
+  if (!productGrid) return;
+
+  try {
+    const response = await fetch("http://localhost:3000/products");
+    if (!response.ok) throw new Error("Помилка завантаження продуктів");
+
+    const products = await response.json();
+
+    // Очищаємо контейнер
+    productGrid.innerHTML = "";
+
+    // Рендеримо кожен продукт (адаптовано під ваш HTML-шаблон продуктів)
+    products.forEach((product) => {
+      const card = document.createElement("div");
+      card.className = "product-card";
+      card.setAttribute("data-color", product.color || "");
+      card.setAttribute("data-size", product.size || "");
+      card.innerHTML = `
+      <img src="${product.image || "images/placeholder.jpg"}" alt="${
+        product.name
+      }" class="product-img">
+      <h3>${product.name}</h3>
+      <p>$${parseFloat(product.price)?.toFixed(2) || "N/A"}</p>
+      <button class="add-to-cart">Request Item</button>
+      `;
+      productGrid.appendChild(card);
+    });
+
+    // Оновлюємо обробники для "add-to-cart" (якщо потрібно, бо вони вже є в DOMContentLoaded)
+    document.querySelectorAll(".add-to-cart").forEach((button) => {
+      button.addEventListener("click", function () {
+        const card = this.closest(".product-card");
+        const name = card.querySelector("h3").textContent;
+        const imgSrc = card.querySelector(".product-img").src;
+
+        const thumbnails = document.querySelectorAll(
+          "#product-modal .thumbnail"
+        );
+        const cardThumbs = card.querySelectorAll(
+          ".thumbnails-container .thumbnail"
+        );
+
+        // Відновлюємо головне фото з коректними розмірами
+        const mainImage = document.getElementById("main-image");
+        mainImage.src = imgSrc;
+        mainImage.style.maxWidth = "100%";
+        mainImage.style.height = "300px";
+
+        // Очищаємо існуючі thumbnails і додаємо лише ті, що є
+        const thumbnailContainer = document.querySelector(".thumbnail-images");
+        thumbnails.forEach((thumb) => thumb.remove());
+        cardThumbs.forEach((thumb, i) => {
+          const newThumb = document.createElement("img");
+          newThumb.src = thumb.src || "images/placeholder.jpg";
+          newThumb.alt = `Thumbnail ${i + 1}`;
+          newThumb.className =
+            "thumbnail w-15 h-15 object-cover rounded-md cursor-pointer border-2 border-transparent hover:border-gray-500";
+          newThumb.classList.toggle("active", i === 0);
+          thumbnailContainer.appendChild(newThumb);
+        });
+
+        document.getElementById("product-modal").classList.add("active");
+        document.body.classList.add("no-scroll");
+
+        // Оновлюємо дані в модалці
+        document.getElementById("product-name").textContent = name;
+      });
+    });
+  } catch (err) {
+    console.error("Помилка завантаження продуктів:", err);
+    // Опціонально: Покажіть помилку користувачу
+    productGrid.innerHTML =
+      "<p>Помилка завантаження продуктів. Спробуйте пізніше.</p>";
+  }
+}
