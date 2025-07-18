@@ -548,7 +548,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let total = 0; // Якщо є ціни, розрахуйте тут
 
         try {
-          const response = await fetch("http://localhost:3000/orders", {
+          const response = await fetch("project333-ten.vercel.app/orders", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -887,7 +887,7 @@ async function loadProducts() {
   if (!productGrid) return;
 
   try {
-    const response = await fetch("http://localhost:3000/products");
+    const response = await fetch("project333-ten.vercel.app/products");
     if (!response.ok) throw new Error("Помилка завантаження продуктів");
 
     const products = await response.json();
